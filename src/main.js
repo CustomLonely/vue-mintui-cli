@@ -24,9 +24,30 @@ Vue.component(Field.name, Field)
 Vue.component(Switch.name, Switch)
 
 import '../static/base.css'
+//导入网络请求模块
+import { post, get, patch, put } from './untils/http'
+
+
+//定义全局变量
+
+Vue.prototype.$post = post;
+Vue.prototype.$get = get;
+Vue.prototype.$patch = patch;
+Vue.prototype.$put = put;
+
 window.App = {
   Config
 }
+
+//使用实例:
+// this.$get('/api/v2/movie/top250')
+// .then(res => {
+//   console.log(res)
+// },
+//     err=>{
+//    console.log(err)
+//     }
+// )
 Vue.config.productionTip = true
 
 /* eslint-disable no-new */

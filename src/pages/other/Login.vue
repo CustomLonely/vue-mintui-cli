@@ -5,7 +5,7 @@
       <mt-switch :value.sync="value" name="c..."></mt-switch>
     </mt-field>
     <mt-field label="验证码" class="security_code">
-      <img src="../../assets/images/timg.jpg">
+      <img src="../../assets/images/timg.jpg" class="security_code_img">
 
     </mt-field>
   </div>
@@ -40,6 +40,10 @@ export default {
     max-height: 48px;
     align-items: center;
     justify-content: space-between;
+    .security_code_img {
+      max-width: 48px;
+      width: auto;
+    }
     .btns {
       display: flex;
       flex-direction: column;
