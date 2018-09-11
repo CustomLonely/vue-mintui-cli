@@ -17,13 +17,18 @@ import router from './router'
 
 import Config from './config/Config.js'
 
+<<<<<<< HEAD
 
 import { Header, Button, Field, Switch, Tabbar, TabItem } from 'mint-ui'
+=======
+import { Header, Button, Field, Switch } from 'mint-ui'
+>>>>>>> f3bf9c5cb26d9f378ff5c3205bdeda7aad488254
 Vue.component(Header.name, Header)
 Vue.component(Button.name, Button)
 Vue.component(Field.name, Field)
 Vue.component(Switch.name, Switch)
 
+<<<<<<< HEAD
 Vue.component(Tabbar.name, Tabbar);
 Vue.component(TabItem.name, TabItem);
 import '../static/base.css'
@@ -59,6 +64,12 @@ window.Api = {
 //    console.log(err)
 //     }
 // )
+=======
+import '../static/base.css'
+window.App = {
+  Config
+}
+>>>>>>> f3bf9c5cb26d9f378ff5c3205bdeda7aad488254
 Vue.config.productionTip = true
 
 /* eslint-disable no-new */

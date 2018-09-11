@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+<<<<<<< HEAD
  
     <Login v-if='$store.state.isload'></Login>
       <mt-tabbar  v-else>
@@ -20,10 +21,15 @@
         tab4
       </mt-tab-item>
     </mt-tabbar>
+=======
+    <Header :mytitle="content"></Header>
+    <Login></Login>
+>>>>>>> f3bf9c5cb26d9f378ff5c3205bdeda7aad488254
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
 import Login from "./pages/other/Login.vue";
 
 export default {
@@ -34,6 +40,18 @@ export default {
     console.log(this.$store.state.isload);
   },
   components: { Login }
+=======
+import { Header } from "./components/index.js";
+import Login from "./pages/other/Login.vue";
+export default {
+  data() {
+    return {
+      content: "密码登录",
+      isload: false
+    };
+  },
+  components: { Header, Login }
+>>>>>>> f3bf9c5cb26d9f378ff5c3205bdeda7aad488254
 };
 </script>
 

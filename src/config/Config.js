@@ -7,7 +7,11 @@ let environment = 'local';
 // 数据接口
 // http://192.168.1.2:8089/index.php/v1/
 const apiUrl = {
+<<<<<<< HEAD
   local: '//elm.cangdu.org',
+=======
+  local: 'http://apidemo.shruanping.com',
+>>>>>>> f3bf9c5cb26d9f378ff5c3205bdeda7aad488254
   online: 'http://192.168.1.56',
 };
 

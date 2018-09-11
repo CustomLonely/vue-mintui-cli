@@ -10,9 +10,23 @@ export default {
   data() {
     return {};
   },
+<<<<<<< HEAD
   created() {},
   mounted() {},
   methods: {}
+=======
+  created() {
+    console.log(this.mytitle);
+  },
+  mounted() {
+    console.log(this.mytitle);
+  },
+  methods: {
+    goPage() {
+      this.$router.go(-1);
+    }
+  }
+>>>>>>> f3bf9c5cb26d9f378ff5c3205bdeda7aad488254
 };
 </script>
 

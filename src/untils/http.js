@@ -9,7 +9,11 @@ axios.defaults.baseURL = Config.url;
 axios.interceptors.request.use(
   config => {
     // const token = getCookie('名称');注意使用的时候需要引入cookie方法，推荐js-cookie
+<<<<<<< HEAD
 
+=======
+    console.log(config);
+>>>>>>> f3bf9c5cb26d9f378ff5c3205bdeda7aad488254
     config.data = JSON.stringify(config.data);
     config.headers = {
 
