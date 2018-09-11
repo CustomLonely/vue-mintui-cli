@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-<<<<<<< HEAD
      <Header :mytitle="content" ref='header' @click="goPage"></Header>
     <mt-field label="用户名" placeholder="请输入用户名" disableClear></mt-field>
     <mt-field label="密码" placeholder="请输入密码" type="password" disableClear>
@@ -10,21 +9,10 @@
       <img :src="imgUrl" class="security_code_img">
     </mt-field>
      <mt-button class="login_button" type="primary">登录</mt-button>
-=======
-    <mt-field label="用户名" placeholder="请输入用户名"></mt-field>
-    <mt-field label="密码" placeholder="请输入密码" type="password">
-      <mt-switch :value.sync="value" name="c..."></mt-switch>
-    </mt-field>
-    <mt-field label="验证码" class="security_code">
-      <img src="../../assets/images/timg.jpg">
-
-    </mt-field>
->>>>>>> f3bf9c5cb26d9f378ff5c3205bdeda7aad488254
   </div>
 </template>
 
 <script>
-<<<<<<< HEAD
 import { Header } from "../../components/index.js";
 import { postCaptchas } from "../../ports";
 export default {
@@ -58,13 +46,6 @@ export default {
   },
   components: {
     Header
-=======
-export default {
-  data() {
-    return {
-      value: ""
-    };
->>>>>>> f3bf9c5cb26d9f378ff5c3205bdeda7aad488254
   }
 };
 </script>
