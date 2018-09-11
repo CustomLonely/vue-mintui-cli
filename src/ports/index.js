@@ -395,6 +395,104 @@ export const delAddress = () =>
 
 /***
  * 下单
- * 
+ * @param {number}   user_id            用户id
+ * @param {number}   cart_id            购物车ID
+ * @param {number}   address_id          收货地址ID
+ * @param {string}   geohash            经纬度
+ * @param {number}   restaurant_id       餐馆ID
+ * @param {string}   description        备注
+ * @param {array}   entities            购物车数据
+ * [{attrs:[],extra:{},id:食品id,name:食品名称,
+ * packing_fee:打包费,price:价格,quantity:数量,
+ * sku_id:规格id,specs:规格,stock:存量,}] 
  * 
  */
+
+export const addOrder = (user_id, cart_id, address_id,
+    geohash, restaurant_id,description,entities) =>
+    post(`v1/users/${user_id}/carts/${cart_id}/orders`, {
+        address_id,
+        geohash,
+        restaurant_id,
+        description,
+        entities
+    })
+
+/***
+ * 订单列表
+ * @param {number}   user_id            用户id
+ * @param {number}   limit             获取数据数量
+ * @param {number}   offset           跳过数据条数
+ */
+
+export const orderList = (user_id,limit,offset) =>
+    get(`bos/v2/users/${user_id}/orders`, {
+        limit,
+        offset
+    })
+
+/***
+ * 订单详情
+ * @param {number}   user_id            用户id
+ * @param {number}   order_id           订单id
+ */
+
+export const orderInfo = (user_id, order_id) =>
+    get(`bos/v1/users/${user_id}/orders/${order_id}/snapshot`)
+
+/***
+ * 服务中心
+ * 
+ */
+
+export const serviceCenter = () => get('v3/profile/explain');
+
+/***
+ * 可用红包
+ * @param {number}   user_id            用户id
+ * @param {number}   limit             获取数据数量
+ * @param {number}   offset           跳过数据条数
+ */
+
+export const hongbaos = (user_id,limit,offset) =>
+    get(`promotion/v2/users/${user_id}/hongbaos`, {
+        limit,
+        offset
+    })
+
+/***
+ * 过期红包
+ * @param {number}   user_id            用户id
+ * @param {number}   limit             获取数据数量
+ * @param {number}   offset           跳过数据条数
+ */
+
+export const expired_hongbaos = (user_id, limit, offset) =>
+    get(`promotion/v2/users/${user_id}/expired_hongbaos`, {
+        limit,
+        offset
+    })
+
+/***
+ * 兑换红包
+ * @param {number}   user_id            用户id
+ * @param {number}   exchange_code      兑换码
+ * @param {number}   captcha_code       验证码
+ */
+
+export const exchange_hongbao = (user_id, exchange_code,
+    captcha_code) = post(`v1/users/${user_id}/hongbao/exchange`, {
+        exchange_code,
+         captcha_code
+    })
+
+/***
+ * 管理员登录
+ * @param {string}   user_name     用户名
+ * @param {string}   password      密码
+ */
+
+export const adminLogin = (user_name,password) => post('admin/login', {
+    user_name,
+    password
+})
