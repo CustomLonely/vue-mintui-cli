@@ -1,0 +1,357 @@
+//导入网络请求模块
+import { post, get } from '../untils/http'
+
+/**
+ * 定位城市
+ * 
+ */
+export const getDefaultCity = get('v1/cities', { type: "guess" });
+
+/**
+ * 热门城市
+ * 
+ */
+export const getHotCity = get('v1/cities', { type: "hot" });
+
+/**
+ * 全部城市
+ * 
+ */
+
+export const getTotalCity = get('v1/cities', { type: "group" });
+
+/**
+ * 获取所选城市信息
+ * 
+ */
+
+export const getSelectCity = number => get("v1/cities/" + number);
+
+
+/**
+ * 搜索地址
+ * 
+ */
+
+export const searchCity = (city_id, keyword, type = 'search') =>
+    get("v1/pois", { city_id, keyword, type })
+
+
+/**
+ * 根据经纬度详细定位
+ * 
+ */
+
+export const getAddressInfo = (string) => get('v2/pois/' + string);
+
+/**
+ * 食品分类列表
+ * 
+ */
+export const getFoodEntry = get('v2/index_entry');
+
+/***
+ * 
+ * 获取商铺列表
+ * @param {string} latitude 纬度
+ * @param {string} longitude 经度
+ * @param {number} offset 跳过多少条数据，默认0
+ * @param {number} limit 请求数据的数量，默认20
+ * @param {number} restaurant_category_id 餐馆分类id
+ * @param {number} order_by 排序方式id： 1：起送价、2：配送速度、3:评分、4: 智能排序(默认)、5:距离最近、6:销量最高
+ * @param {array} delivery_mode 配送方式id
+ * @param {array} support_ids 餐馆支持特权的id
+ * @param {array} restaurant_category_ids 餐馆分类id
+ */
+
+export const restaurants =
+    (latitude, longitude, offset = 0, limit = 20,
+        restaurant_category_id, order_by = 4, delivery_mode,
+        support_ids, restaurant_category_ids) =>
+        get('shopping/restaurants', {
+            latitude,
+            longitude,
+            offset,
+            limit,
+            restaurant_category_id,
+            order_by,
+            delivery_mode,
+            support_ids,
+            restaurant_category_ids
+        })
+
+/**
+ * 搜索餐馆
+ * @param {string}  geohash 经纬度
+ * @param {string}  keyword 关键词
+ * 
+ */
+
+export const searchDiner = (geohash, keyword) => get('v4/restaurants', {
+    geohash,
+    keyword
+})
+
+/***
+ * 获取所有商铺分类列表
+ * 
+ * @param {string}  latitude 纬度
+ * @param {string}  longitude 经度
+ * 
+ */
+
+export const getAllShops = (latitude, longitude) => get('shopping/v2/restaurant/category', {
+    latitude,
+    longitude
+})
+
+/***
+ * 获取配送方式
+ * 
+ * @param {string}  latitude 纬度
+ * @param {string}  longitude 经度
+ */
+export const getDelivery = (latitude, longitude) => get('shopping/v1/restaurants/delivery_modes', {
+    latitude,
+    longitude
+})
+
+/***
+ * 商家属性活动列表
+ * 
+ * @param {string}  latitude 纬度
+ * @param {string}  longitude 经度
+ */
+
+
+export const foodActivity = (latitude, longitude) => get('shopping/v1/restaurants/activity_attributes', {
+    latitude,
+    longitude
+})
+
+/***
+ * 餐馆详情
+ * @param {number}  shopid 餐馆id
+ */
+
+export const shopDetails = shopid => get('shopping/restaurant/' + shopid)
+
+/***
+ * 上传图片
+ * @param {string }  type 图片类型
+ */
+export const uploadImg = type => post('v1/addimg/' + type)
+
+/***
+ * 添加餐馆
+ * @param {string }  name                             餐馆名称   
+ * @param {string }  address                          餐馆地址   
+ * @param {string }  phone                            联系电话   
+ * @param {string }  latitude                             纬度   
+ * @param {string }  longitude                            经度   
+ * @param {string }  category                         食品分类
+ * @param {string }  image_path                    店铺图片地址
+ * @param {string }  float_delivery_fee                   运费
+ * @param {string }  float_minimum_order_amount          起送价
+ * @param {string }  description                       餐馆介绍
+ * @param {string }  promotion_info                    店铺标语
+ * @param {boolean}  is_premium                品牌商铺默认false
+ * @param {boolean}  new                     新开店铺，默认false
+ * @param {boolean}  bao                     支持保险，默认false 
+ * @param {boolean}  delivery_mode          支持蜂鸟专送默认false
+ * @param {boolean}  zhun                       准时达，默认false
+ * @param {boolean}  piao                       开发票，默认false
+ * @param {string}   startTime                       开始营业时间
+ * @param {string}   endTime                         停止营业时间
+ * @param {string}   business_license_image       营业执照图片地址
+ * @param {string}   catering_service_license_image 餐饮服务许可证图片地址
+ * @param {string}   activities                      商铺活动：
+ * 示例：[{icon_name:'新', name:'新用户立减', description: ''}]
+ * 
+ */
+
+export const addShop = (name, address, phone,
+    latitude, longitude, category, image_path, float_delivery_fee,
+    float_minimum_order_amount, description, promotion_info,
+    is_premium = false, bao = false, delivery_mode = false,
+    zhun = false, piao = false, startTime, endTime,
+    business_license_image, catering_service_license_image,
+    activities) => {
+    let data = {
+        name, address, phone,
+        latitude, longitude, category, image_path, float_delivery_fee,
+        float_minimum_order_amount, description, promotion_info,
+        is_premium, bao, delivery_mode,
+        zhun, piao, startTime, endTime,
+        business_license_image, catering_service_license_image,
+        activities,
+    }
+    return post('shopping/addshop', data);
+}
+
+/***
+ * 添加食品种类
+ * @param {string}   name                       种类
+ * @param {string}   description                描述
+ * @param {string}   restaurant_id             餐馆id
+ */
+
+export const addCategory = (name, description, restaurant_id) =>
+    post('shopping/addcategory', {
+        name,
+        description,
+        restaurant_id
+    })
+
+/***
+ * 添加食品
+ * @param {number}   restaurant_id              餐馆ID
+ * @param {number}   category_id                分类ID
+ * @param {string}   name                       食品名称
+ * @param {string}   image_path                 图片地址
+ * @param {string}   description                描述
+ * @param {array}    specs                      规格：
+ * [{specs: '默认',packing_fee: 0,price: 20,}]
+ * @param {string}   activity                   活动
+ * @param {array}   attributes                  特点：
+ * [{value: '新',label: '新品'}]
+ */
+
+export const addFood = (restaurant_id, category_id, name, image_path,
+    description, specs, activity, attributes) => post('shopping/addfood', {
+        restaurant_id,
+        category_id,
+        name,
+        image_path,
+        description,
+        specs,
+        activity,
+        attributes
+    })
+
+/***
+ * 获取食品列表
+ * @param {number}   restaurant_id              餐馆ID
+ */
+
+export const foodMenu = restaurant_id => get('shopping/v2/menu', {
+    restaurant_id
+})
+
+/***
+ * 获取评价信息
+ * @param {number}   restaurant_id              餐馆ID
+ * @param {string}   tag_name                   评价类型，默认全部
+ * @param {number}   offset                     跳过数据条数
+ * @param {number}   limit                      单次获取数据条数
+ */
+
+export const getAssess = (restaurant_id, tag_name, offset, limit) =>
+    get(`ugc/v2/restaurants/${restaurant_id}/ratings`, {
+        tag_name,
+        offset,
+        limit
+    })
+
+/***
+ * 获取评价分数
+ * @param {number}   restaurant_id              餐馆ID
+ */
+
+export const assessScore = restaurant_id =>
+    get(`ugc/v2/restaurants/${restaurant_id}/ratings/scores`)
+
+/***
+ * 获取评价分类
+ * @param {number}   restaurant_id              餐馆ID
+ */
+
+export const assessSort = restaurant_id =>
+    get(`ugc/v2/restaurants/${restaurant_id}/ratings/tags`);
+
+/***
+ * 加入购物车
+ * @param {number}   restaurant_id              餐馆ID
+ * @param {number}   geohash                    经纬度
+ * @param {array}    entities                   购物车数据
+ * [{attrs:[],extra:{},id:食品id,name:食品名称,
+ * packing_fee:打包费,price:价格,quantity:数量,sku_id:规格id,
+ * specs:规格,stock:存量,}]
+ */
+
+export const addShopCart = (restaurant_id, geohash, entities) =>
+    post('v1/carts/checkout', {
+        restaurant_id,
+        geohash,
+        entities
+    })
+
+/***
+ * 获取备注信息
+ * @param {number}   cart_id                    购物车id
+ */
+
+export const getRemarks = cart_id => get(`v1/carts/${cart_id}/remarks`)
+
+/***
+ * 获取收货地址列表
+ * @param {number}   user_id                    用户id
+ */
+
+export const getAddress = user_id => get(`v1/users/${user_id}/addresses`)
+
+
+/**
+ * 获取验证码 
+ * 
+ */
+
+export const postCaptchas = post('v1/captchas');
+
+/***
+ * 获取用户信息
+ * 
+ */
+
+export const getUserInfo = get('v1/user');
+
+/***
+ * 登录
+ * @param {number}   username                    用户名
+ * @param {number}   password                    密码
+ * @param {number}   captcha_code                验证码
+ */
+
+export const login = (username, password, captcha_code) =>
+    get('v2/login', {
+        username,
+        password,
+        captcha_code
+    })
+
+/***
+ * 退出
+ * 
+ */
+
+export const signOut = get('v2/signout');
+
+/***
+ * 修改密码
+ * @param {number}   username                    用户名
+ * @param {number}   oldpassWord                 旧密码
+ * @param {number}   newpassword                 新密码
+ * @param {number}   confirmpassword             确认密码
+ * @param {number}   captcha_code                验证码
+ */
+
+export const changePassword = (username,
+    oldpassWord, newpassword, confirmpassword, captcha_code) =>
+    post('v2/changepassword', {
+        username,
+        oldpassWord,
+        newpassword,
+        confirmpassword,
+        captcha_code
+    })
+

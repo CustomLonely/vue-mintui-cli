@@ -17,12 +17,15 @@ import router from './router'
 
 import Config from './config/Config.js'
 
-import { Header, Button, Field, Switch } from 'mint-ui'
+
+import { Header, Button, Field, Switch, Tabbar, TabItem } from 'mint-ui'
 Vue.component(Header.name, Header)
 Vue.component(Button.name, Button)
 Vue.component(Field.name, Field)
 Vue.component(Switch.name, Switch)
 
+Vue.component(Tabbar.name, Tabbar);
+Vue.component(TabItem.name, TabItem);
 import '../static/base.css'
 //导入网络请求模块
 import { post, get, patch, put } from './untils/http'
@@ -35,9 +38,17 @@ Vue.prototype.$get = get;
 Vue.prototype.$patch = patch;
 Vue.prototype.$put = put;
 
-window.App = {
-  Config
+
+window.Api = {
+  Config,
+
+  post,
+  get,
+  patch,
+  put
+
 }
+
 
 //使用实例:
 // this.$get('/api/v2/movie/top250')

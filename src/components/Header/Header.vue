@@ -10,17 +10,9 @@ export default {
   data() {
     return {};
   },
-  created() {
-    console.log(this.mytitle);
-  },
-  mounted() {
-    console.log(this.mytitle);
-  },
-  methods: {
-    goPage() {
-      this.$router.go(-1);
-    }
-  }
+  created() {},
+  mounted() {},
+  methods: {}
 };
 </script>
 

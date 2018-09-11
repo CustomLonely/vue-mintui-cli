@@ -9,9 +9,9 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   // 数据：
-  // 存储购物车中的数据
-  state: {
 
+  state: {
+    isload: true
   },
 
   mutations: {

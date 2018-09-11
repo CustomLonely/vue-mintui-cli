@@ -1,21 +1,39 @@
 <template>
   <div id="app">
-    <Header :mytitle="content"></Header>
-    <Login></Login>
+ 
+    <Login v-if='$store.state.isload'></Login>
+      <mt-tabbar  v-else>
+      <mt-tab-item id="tab1" name='food'>
+        <img slot="icon" src="./assets/images/burger.png">
+        tab1
+      </mt-tab-item>
+      <mt-tab-item id="tab2"  name='order'>
+        <img slot="icon" src="./assets/images/burger.png">
+        tab2
+      </mt-tab-item>
+      <mt-tab-item id="tab3" name='search'>
+        <img slot="icon" src="./assets/images/burger.png">
+        tab3
+      </mt-tab-item>
+      <mt-tab-item id="tab4" name='user'>
+        <img slot="icon" src="./assets/images/burger.png">
+        tab4
+      </mt-tab-item>
+    </mt-tabbar>
   </div>
 </template>
 
 <script>
-import { Header } from "./components/index.js";
 import Login from "./pages/other/Login.vue";
+
 export default {
   data() {
-    return {
-      content: "密码登录",
-      isload: false
-    };
+    return {};
   },
-  components: { Header, Login }
+  created() {
+    console.log(this.$store.state.isload);
+  },
+  components: { Login }
 };
 </script>
 
