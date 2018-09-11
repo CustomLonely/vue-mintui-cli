@@ -69,24 +69,18 @@ export default {
     max-height: 48px;
     align-items: center;
     justify-content: space-between;
-<<<<<<< HEAD
     .security_code_img {
       max-width: 48px;
       width: auto;
     }
-=======
->>>>>>> f3bf9c5cb26d9f378ff5c3205bdeda7aad488254
     .btns {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
   }
-<<<<<<< HEAD
   .login_button {
     margin: 0 12px;
   }
-=======
->>>>>>> f3bf9c5cb26d9f378ff5c3205bdeda7aad488254
 }
 </style>

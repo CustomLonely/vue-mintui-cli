@@ -1,5 +1,5 @@
 //导入网络请求模块
-import { post, get } from '../untils/http'
+import { post, get,Delete} from '../untils/http'
 
 /**
  * 定位城市
@@ -272,7 +272,7 @@ export const assessSort = restaurant_id =>
 /***
  * 加入购物车
  * @param {number}   restaurant_id              餐馆ID
- * @param {number}   geohash                    经纬度
+ * @param {string}   geohash                    经纬度
  * @param {array}    entities                   购物车数据
  * [{attrs:[],extra:{},id:食品id,name:食品名称,
  * packing_fee:打包费,price:价格,quantity:数量,sku_id:规格id,
@@ -317,9 +317,9 @@ export const getUserInfo = get('v1/user');
 
 /***
  * 登录
- * @param {number}   username                    用户名
- * @param {number}   password                    密码
- * @param {number}   captcha_code                验证码
+ * @param {string}   username                    用户名
+ * @param {string}   password                    密码
+ * @param {string}   captcha_code                验证码
  */
 
 export const login = (username, password, captcha_code) =>
@@ -338,11 +338,11 @@ export const signOut = get('v2/signout');
 
 /***
  * 修改密码
- * @param {number}   username                    用户名
- * @param {number}   oldpassWord                 旧密码
- * @param {number}   newpassword                 新密码
- * @param {number}   confirmpassword             确认密码
- * @param {number}   captcha_code                验证码
+ * @param {string}   username                    用户名
+ * @param {string}   oldpassWord                 旧密码
+ * @param {string}   newpassword                 新密码
+ * @param {string}   confirmpassword             确认密码
+ * @param {string}   captcha_code                验证码
  */
 
 export const changePassword = (username,
@@ -355,3 +355,46 @@ export const changePassword = (username,
         captcha_code
     })
 
+/***
+ * 增加收货地址
+ * @param {number}   user_id            用户id
+ * @param {string}   address            地址
+ * @param {string}   address_detail     地址详情
+ * @param {string}   geohash            经纬度
+ * @param {string}   name               收货人姓名
+ * @param {string}   phone              电话号码
+ * @param {string}   tag                标签
+ * @param {number}   sex                性别， 1:男，2:女
+ * @param {number}   poi_type           类型，默认：0
+ * @param {string}   phone_bk           备注电话
+ * @param {number}   tag_type           标签类型，2:家，3:学校，4:公司
+ */
+
+export const insertAddress = (user_id, address, address_detail,
+    geohash, name, phone, tag, sex, poi_type, phone_bk = 0,
+    tag_type) => post(`v1/users/${user_id}/addresses`, {
+        address,
+        address_detail,
+        geohash,
+        name,
+        phone,
+        tag, sex,
+        poi_type,
+        phone_bk,
+        tag_type
+    })
+
+/***
+ * 删除收货地址
+ * @param {number}   user_id            用户id
+ * @param {number}   address_id         收货地址id
+ */
+
+export const delAddress = () =>
+    Delete(`v1/users/${user_id}/addresses/${address_id}`);
+
+/***
+ * 下单
+ * 
+ * 
+ */
