@@ -1,6 +1,8 @@
 //导入网络请求模块
 import axios from 'axios';
+
 import { post, get, Delete } from '../untils/http'
+
 /***
  * http://wthrcdn.etouch.cn/weather_mini
  * 天气接口
@@ -8,6 +10,7 @@ import { post, get, Delete } from '../untils/http'
  * 例：city=北京，city=beijing，city=CN101010100，city= 60.194.130.1
  *  @param {string} key 用户认证key
  */
+
 export const getWeather = (city) => axios.post('https://www.apiopen.top/weatherApi?city=' + city, {
 
 
@@ -41,9 +44,7 @@ export const getSelectCity = number => get("v1/cities/" + number);
 
 /**
  * 搜索地址
- * @param {number} city_id 城市id
- * @param {string} keyword 搜索关键词
- * @param {string} type    搜索类型，默认为search
+ * 
  */
 
 export const searchCity = (city_id, keyword, type = 'search') =>
@@ -52,10 +53,10 @@ export const searchCity = (city_id, keyword, type = 'search') =>
 
 /**
  * 根据经纬度详细定位
- * @param {string} geohash 经纬度
+ * 
  */
 
-export const getAddressInfo = (string) => get(`v2/pois/${string}`);
+export const getAddressInfo = (string) => get('v2/pois/' + string);
 
 /**
  * 食品分类列表
@@ -151,23 +152,23 @@ export const shopDetails = shopid => get('shopping/restaurant/' + shopid)
 
 /***
  * 上传图片
- * @param {string }  type 图片类型
+ * @param {string }  type 图片类型
  */
 export const uploadImg = type => post('v1/addimg/' + type)
 
 /***
  * 添加餐馆
- * @param {string }  name                             餐馆名称   
- * @param {string }  address                          餐馆地址   
- * @param {string }  phone                            联系电话   
- * @param {string }  latitude                             纬度   
- * @param {string }  longitude                            经度   
- * @param {string }  category                         食品分类
- * @param {string }  image_path                    店铺图片地址
- * @param {string }  float_delivery_fee                   运费
- * @param {string }  float_minimum_order_amount          起送价
- * @param {string }  description                       餐馆介绍
- * @param {string }  promotion_info                    店铺标语
+ * @param {string }  name                             餐馆名称   
+ * @param {string }  address                          餐馆地址   
+ * @param {string }  phone                            联系电话   
+ * @param {string }  latitude                             纬度   
+ * @param {string }  longitude                            经度   
+ * @param {string }  category                         食品分类
+ * @param {string }  image_path                    店铺图片地址
+ * @param {string }  float_delivery_fee                   运费
+ * @param {string }  float_minimum_order_amount          起送价
+ * @param {string }  description                       餐馆介绍
+ * @param {string }  promotion_info                    店铺标语
  * @param {boolean}  is_premium                品牌商铺默认false
  * @param {boolean}  new                     新开店铺，默认false
  * @param {boolean}  bao                     支持保险，默认false 
@@ -336,7 +337,7 @@ export const getUserInfo = get('v1/user');
  */
 
 export const login = (username, password, captcha_code) =>
-    post('v2/login', {
+    get('v2/login', {
         username,
         password,
         captcha_code
@@ -422,7 +423,7 @@ export const delAddress = () =>
  */
 
 export const addOrder = (user_id, cart_id, address_id,
-    geohash, restaurant_id, description, entities) =>
+    geohash, restaurant_id,description,entities) =>
     post(`v1/users/${user_id}/carts/${cart_id}/orders`, {
         address_id,
         geohash,
@@ -438,7 +439,7 @@ export const addOrder = (user_id, cart_id, address_id,
  * @param {number}   offset           跳过数据条数
  */
 
-export const orderList = (user_id, limit, offset) =>
+export const orderList = (user_id,limit,offset) =>
     get(`bos/v2/users/${user_id}/orders`, {
         limit,
         offset
@@ -467,7 +468,7 @@ export const serviceCenter = () => get('v3/profile/explain');
  * @param {number}   offset           跳过数据条数
  */
 
-export const hongbaos = (user_id, limit, offset) =>
+export const hongbaos = (user_id,limit,offset) =>
     get(`promotion/v2/users/${user_id}/hongbaos`, {
         limit,
         offset
@@ -496,7 +497,7 @@ export const expired_hongbaos = (user_id, limit, offset) =>
 export const exchange_hongbao = (user_id, exchange_code,
     captcha_code) => post(`v1/users/${user_id}/hongbao/exchange`, {
         exchange_code,
-        captcha_code
+         captcha_code
     })
 
 /***
@@ -505,7 +506,21 @@ export const exchange_hongbao = (user_id, exchange_code,
  * @param {string}   password      密码
  */
 
-export const adminLogin = (user_name, password) => post('admin/login', {
+export const adminLogin = (user_name,password) => post('admin/login', {
     user_name,
     password
 })
+
+/***
+ * 管理员退出登录
+ * 
+ */
+
+export const adminSignOut = () => get('admin/singout')
+
+/***
+ * 管理员信息
+ * 
+ */
+
+export const adminInfo=()=>get('admin/info')
