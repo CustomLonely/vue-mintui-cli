@@ -7,7 +7,11 @@ export default [{
     component: App,
     children: [
         {
-            path: "/Home",
+            path: "",
+            component: home
+        },
+        {
+            path: '/home',
             component: home
         },
     ]

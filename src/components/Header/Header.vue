@@ -1,7 +1,11 @@
 <template>
-  <mt-header :title="mytitle">
+ <div class="header">
+    <mt-header :title="mytitle">
+    <slot name='left'></slot>
+    <slot name='right'></slot>
     <mt-button @click="goPage()" icon="back" slot="left"></mt-button>
   </mt-header>
+ </div>
 </template>
 
 <script>
@@ -25,5 +29,9 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style lang='less'>
+header {
+  min-height: 40px;
+  background-color: #3190e8;
+}
 </style>

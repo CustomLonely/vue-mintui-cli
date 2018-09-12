@@ -77,7 +77,10 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       },
       // 处理 sass
-      { test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] },
+      {
+        test: /\.less$/,
+        loader: 'style-loader!css-loader!less-loader'
+      },
 
     ]
   },

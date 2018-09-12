@@ -73,9 +73,13 @@ export const loadMore = (element, callback) => {
     document.body.addEventListener('scroll', () => {
         loadMore();
     }, false);
+
+    //运动开始时获取元素 高度 和 offseTop, pading, margin
     element.addEventListener('touchstart', () => {
 
-    })
+        height = element.offsetHeight;
+
+    }, { passive: true });
 }
 
  /**

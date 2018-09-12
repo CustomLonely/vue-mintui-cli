@@ -1,5 +1,7 @@
+import Vue from 'vue'
 import axios from 'axios';
-import { Message } from 'element-ui';
+import { Indicator } from 'mint-ui';
+Vue.use(Indicator);
 import Config from '../config/Config'
 axios.defaults.timeout = 5000;
 axios.defaults.baseURL = Config.url;
@@ -20,10 +22,11 @@ axios.interceptors.request.use(
     // if(token){
     //   config.params = {'token':token}
     // }
+    Indicator.open();
     return config;
   },
   error => {
-    return Promise.reject(err);
+    return Promise.reject(error);
   }
 );
 
@@ -37,6 +40,7 @@ axios.interceptors.response.use(
     //     querry:{redirect:router.currentRoute.fullPath}//从哪个页面跳转
     //   })
     // }
+    Indicator.close();
     return config;
   },
   error => {
@@ -128,7 +132,7 @@ export function put(url, data = {}) {
 * @returns {Promise}
 */
 
-export function Delete(url, data = {}){
+export function Delete(url, data = {}) {
   return new Promise((resolve, reject) => {
     axios.delete(url, data).then(response => {
       resolve(response.data);

@@ -1,30 +1,17 @@
 <template>
-  <div id="app">
- 
-    <Login v-if='$store.state.isload'></Login>
-      <mt-tabbar  v-else>
-      <mt-tab-item id="tab1" name='food'>
-        <img slot="icon" src="./assets/images/burger.png">
-        tab1
-      </mt-tab-item>
-      <mt-tab-item id="tab2"  name='order'>
-        <img slot="icon" src="./assets/images/burger.png">
-        tab2
-      </mt-tab-item>
-      <mt-tab-item id="tab3" name='search'>
-        <img slot="icon" src="./assets/images/burger.png">
-        tab3
-      </mt-tab-item>
-      <mt-tab-item id="tab4" name='user'>
-        <img slot="icon" src="./assets/images/burger.png">
-        tab4
-      </mt-tab-item>
-    </mt-tabbar>
+  <div >
+	<transition name="router-fade" mode="out-in">
+			<keep-alive>
+			    <router-view v-if="$route.meta.keepAlive"></router-view>
+			</keep-alive>
+    	</transition>
+      <transition name="router-fade" mode="out-in">
+			<router-view v-if="!$route.meta.keepAlive"></router-view>
+		</transition>
   </div>
 </template>
 
 <script>
-
 import Login from "./pages/other/Login.vue";
 export default {
   data() {
@@ -37,7 +24,7 @@ export default {
 };
 </script>
 
-<style>
+ <style lang="less">
 #app {
   position: absolute;
   left: 0;
@@ -45,4 +32,13 @@ export default {
   top: 0;
   right: 0;
 }
+.router-fade-enter-active,
+.router-fade-leave-active {
+  transition: opacity 0.3s;
+}
+.router-fade-enter,
+.router-fade-leave-active {
+  opacity: 0;
+}
 </style>
+
