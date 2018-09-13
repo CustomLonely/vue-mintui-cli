@@ -35,7 +35,7 @@ export const getHotCity = get('v1/cities', { type: "hot" });
 export const getTotalCity = get('v1/cities', { type: "group" });
 
 /**
- * 获取所选城市信息
+ * 获取当前城市信息
  * 
  */
 
@@ -423,7 +423,7 @@ export const delAddress = () =>
  */
 
 export const addOrder = (user_id, cart_id, address_id,
-    geohash, restaurant_id,description,entities) =>
+    geohash, restaurant_id, description, entities) =>
     post(`v1/users/${user_id}/carts/${cart_id}/orders`, {
         address_id,
         geohash,
@@ -439,7 +439,7 @@ export const addOrder = (user_id, cart_id, address_id,
  * @param {number}   offset           跳过数据条数
  */
 
-export const orderList = (user_id,limit,offset) =>
+export const orderList = (user_id, limit, offset) =>
     get(`bos/v2/users/${user_id}/orders`, {
         limit,
         offset
@@ -468,7 +468,7 @@ export const serviceCenter = () => get('v3/profile/explain');
  * @param {number}   offset           跳过数据条数
  */
 
-export const hongbaos = (user_id,limit,offset) =>
+export const hongbaos = (user_id, limit, offset) =>
     get(`promotion/v2/users/${user_id}/hongbaos`, {
         limit,
         offset
@@ -497,7 +497,7 @@ export const expired_hongbaos = (user_id, limit, offset) =>
 export const exchange_hongbao = (user_id, exchange_code,
     captcha_code) => post(`v1/users/${user_id}/hongbao/exchange`, {
         exchange_code,
-         captcha_code
+        captcha_code
     })
 
 /***
@@ -506,7 +506,7 @@ export const exchange_hongbao = (user_id, exchange_code,
  * @param {string}   password      密码
  */
 
-export const adminLogin = (user_name,password) => post('admin/login', {
+export const adminLogin = (user_name, password) => post('admin/login', {
     user_name,
     password
 })
@@ -523,4 +523,4 @@ export const adminSignOut = () => get('admin/singout')
  * 
  */
 
-export const adminInfo=()=>get('admin/info')
+export const adminInfo = () => get('admin/info')

@@ -9,20 +9,31 @@ Es6Promise.polyfill()
 import Vue from 'vue'
 
 // 导入 vuex
-import store from './store'
+import store from '@/store'
 
 import App from './App'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
-import routes from './router'
+import routes from '@/router'
 const router = new VueRouter({
   routes,
 
 })
-import Config from './config/Config.js'
+import Config from '@/config/Config.js'
 
 
-import { Header, Button, Field, Switch, Tabbar, TabItem, Cell } from 'mint-ui'
+import {
+  Header,
+  Button,
+  Field,
+  Switch,
+  Tabbar,
+  TabItem,
+  Cell,
+  IndexList,
+  IndexSection,
+  Search
+} from 'mint-ui'
 Vue.component(Header.name, Header)
 Vue.component(Button.name, Button)
 Vue.component(Field.name, Field)
@@ -30,9 +41,11 @@ Vue.component(Switch.name, Switch)
 Vue.component(Cell.name, Cell);
 Vue.component(Tabbar.name, Tabbar);
 Vue.component(TabItem.name, TabItem);
-
+Vue.component(IndexList.name, IndexList);
+Vue.component(IndexSection.name, IndexSection);
+Vue.component(Search.name, Search);
 //导入网络请求模块
-import { post, get, patch, put } from './untils/http'
+import { post, get, patch, put } from '@/untils/http'
 
 
 //定义全局变量
@@ -45,7 +58,6 @@ Vue.prototype.$put = put;
 
 window.Api = {
   Config,
-
   post,
   get,
   patch,

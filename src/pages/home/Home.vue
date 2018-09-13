@@ -1,5 +1,6 @@
 <template>
     <div>
+        
         <mt-cell :title="addressInfo" class="addressinfo">
             <span>{{weather}}℃
                             <img slot="icon" src="../../assets/images/24280.jpg" width="24" height="24">
@@ -7,94 +8,125 @@
             <img slot="icon" src="../../assets/images/24213.jpg" width="24" height="24">
         </mt-cell>
         <mt-cell class="positoncity" title="当前定位城市" value="定位不准时，请在城市列表中选择"></mt-cell>
-        <mt-cell class="defaultcity" :title="address">
-            <img src="../../assets/images/arrowright.svg" width="16" height="16">
+        <mt-cell class="defaultcity" :title="address"  :to="{path:'/city/'+addressId,query:{name:address}}" is-link>
+           
         </mt-cell>
           <mt-cell title="热门城市"></mt-cell>
         <ul class="hotcity" >
-            <li v-for="(item,index) in hotCity" :key="index">{{item.name}}</li>
+            <router-link :to="{path:'/city/'+item.id,query:{name:item.name}}"
+             tag="li" v-for="(item,index) in hotCity" :key="index" class="hotname">
+             {{item.name}}
+             </router-link>
         </ul>
          <mt-cell title="全部城市"></mt-cell>
-        <ul class="totalcity">
-          <li  v-for="(item,key) in totalCity" :key="key">
-            <h4>{{key}}
-             
-            </h4>
-           
-            <ul class="totalinfo">
-              <li v-for="(v,i) in item" :key="i">{{v.name}}</li>
-            </ul>
-          </li>
-        </ul>
+         <div class="citywrapper" style="{height:fixBottom+'px'}">
+            <mt-index-list >
+            <mt-index-section  v-for="(item,key) in sortCitys" :key="key" :index="key">
+              
+             <ul class="hotcity" >
+            <router-link :to="{path:'/city/'+v.id,query:{name:v.name}}" tag="li" v-for="(v,i) in item" :key="i">{{v.name}}</router-link>
+           </ul>
+            </mt-index-section>
+
+          </mt-index-list>
+         </div>
+        
+    
     </div>
 </template>
 <script>
-import { Header } from "../../components";
-import { getDefaultCity, getWeather, 
-getAddressInfo,getHotCity,getTotalCity} from "../../ports";
+import { Header } from "@/components";
+import {
+  getDefaultCity,
+  getWeather,
+  getAddressInfo,
+  getHotCity,
+  getTotalCity
+} from "@/ports";
 export default {
   data() {
     return {
-      addressInfo: "",
-      weather: "",
-      address: "",
-      hotCity: [],
-      totalCity:[]
+      addressInfo: "", //当前城市详细地址
+      weather: "", //天气温度
+      address: "", //当前城市
+      addressId: "", //当前城市id
+      hotCity: [], //热门城市
+      totalCity: [], //全部城市
+      fixBottom: "" //全部城市高度
     };
   },
-  created() {
-    this.getLocationCity();
-    this.getHotCitys();
-    this.getTotalCitys();
-  },
-  methods: {
-    getLocationCity() {
-      getDefaultCity
-        .then(
-          res => {
-            return res;
-          },
-          err => {
-            console.log(err);
-          }
-        )
-        .then(res => {
-          let position = `${res.latitude},${res.longitude}`;
-          getAddressInfo(position).then(res => {
-            this.addressInfo = res.name;
-            console.log(res);
-          });
-          this.address = res.name;
-          return res.name;
-        })
-        .then(res => {
-          getWeather(res).then(res => {
-            let wendu = res.data.data.wendu;
-            this.weather = wendu;
-          });
-        });
-    },
-    getHotCitys(){
-      getHotCity.then(res=>{
-        console.log(res);
-        this.hotCity=res;
-      },err=>{
-        console.log(err);
-      })
-    },
-    getTotalCitys(){
-      getTotalCity.then(res=>{
-        console.log(res);
-        this.totalCity=res;
-      })
+  watch: {
+    totalCityHeight() {
+      const height = document
+        .getElementsByClassName("citywrapper")[0]
+        .getBoundingClientRect().height;
+      this.fixBottom = this.sortCitys.length > 0 ? height : 0;
+      console.log(this.fixBottom);
     }
-  }
+  },
+  mounted() {
+    //定位城市
+    getDefaultCity
+      .then(
+        res => {
+          console.log(res);
+          this.addressId = res.id;
+          return res;
+        },
+        err => {
+          console.log(err);
+        }
+      )
+      .then(res => {
+        let position = `${res.latitude},${res.longitude}`;
+        getAddressInfo(position).then(res => {
+          this.addressInfo = res.name;
+        });
+        this.address = res.name;
+        return res.name;
+      })
+      .then(res => {
+        getWeather(res).then(res => {
+          let wendu = res.data.data.wendu;
+          this.weather = wendu;
+        });
+      });
+    //热门城市
+    getHotCity.then(
+      res => {
+        this.hotCity = res;
+        console.log(this.hotCity);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+    //全部城市
+    getTotalCity.then(res => {
+      this.totalCity = res;
+      console.log(this.totalCity);
+    });
+  },
+  computed: {
+    sortCitys() {
+      let sortObj = {};
+      for (let i = 65; i <= 90; i++) {
+        if (this.totalCity[String.fromCharCode(i)]) {
+          sortObj[String.fromCharCode(i)] = this.totalCity[
+            String.fromCharCode(i)
+          ];
+        }
+      }
+      return sortObj;
+    }
+  },
+  methods: {}
 };
 </script>
 <style lang="less">
 @import "../../style/basic.less";
 .addressinfo {
-  background-color: #3190e8;
+  background-color: extract(@blueColor, 8);
   .mint-cell-title {
     white-space: nowrap;
     overflow: hidden;
@@ -112,6 +144,7 @@ export default {
     }
   }
 }
+
 .positoncity {
   .mint-cell-title {
     span {
@@ -130,58 +163,34 @@ export default {
 .defaultcity {
   border-top: 1px solid extract(@whiteColor, 4);
   border-bottom: 1px solid extract(@whiteColor, 4);
-  .mint-cell-wrapper{
-    .mint-cell-text{
+  .mint-cell-wrapper {
+    .mint-cell-text {
       color: extract(@blueColor, 1);
     }
   }
 }
-.hotcity,{
- display: flex;
- flex-flow:row wrap;
-  li{
+.hotcity {
+  display: flex;
+  flex-flow: row wrap;
+  li {
     width: 25%;
     text-align: center;
     border: 1px solid extract(@blackColor, 4);
     height: 30px;
     font-size: 17px;
     line-height: 30px;
-    color: extract(@blueColor, 1);
+    color: extract(@blackColor, 5);
+    overflow: hidden;
+    text-overflow: ellipsis; //文本溢出显示省略号
+    white-space: nowrap; //文本不会换行（单行文本溢出）
+    &.hotname {
+      color: extract(@blueColor, 1);
+    }
   }
 }
-.totalcity{
-  width: 100%;
-  li{
-  display: flex;
-  flex-flow: row wrap;
-    h4{
-      display: inline-block;
-      margin-left: 12px;
-      width: 100%;
-      height: 40px;
-      line-height: 40px;
-    }
-    ul{
-      flex:1;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-    
-      li{
-       text-align: center;
-        overflow: hidden;
-  text-overflow:ellipsis;//文本溢出显示省略号
-  white-space:nowrap;//文本不会换行（单行文本溢出）
-        width: 25%;
-    
-    border: 1px solid extract(@blackColor, 4);
-    height: 30px;
-    font-size: 17px;
-    line-height: 30px;
-    color: extract(@blueColor, 1);
-      }
-    }
-  }
+.mint-indexlist-content {
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
 }
 </style>
 
