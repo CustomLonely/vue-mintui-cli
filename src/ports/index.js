@@ -337,7 +337,7 @@ export const getUserInfo = get('v1/user');
  */
 
 export const login = (username, password, captcha_code) =>
-    get('v2/login', {
+    post('v2/login', {
         username,
         password,
         captcha_code

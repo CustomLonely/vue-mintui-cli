@@ -30,16 +30,9 @@ export default {
     this.getSecurityCode();
   },
   methods: {
-    getSecurityCode() {
-      postCaptchas.then(
-        res => {
-          console.log(res);
-          this.imgUrl = res.code;
-        },
-        err => {
-          console.log(err);
-        }
-      );
+   async getSecurityCode() {
+     let res=await postCaptchas
+      this.imgUrl = res.code;
     },
     login() {
       console.log(this.username, this.password, this.securityCode);

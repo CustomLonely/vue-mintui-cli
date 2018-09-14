@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-      <div class="head"  @click="toChild">
-        <Header :mytitle="cityName" ref="header">   
+      <div class="head">
+        <Header :mytitle="cityName"  changecity="true">   
     </Header>
       </div>
       
@@ -12,7 +12,7 @@
      >
         <mt-button class="submitbtn" @click="searchAddress(cityId,keyword)" type="primary" >提交</mt-button>
         <mt-cell v-if="isCity" title="搜索历史"></mt-cell>
-  
+        <mt-cell class="city-item" v-else v-for="(item,index) in cityList" :key="index" :title="item.address" :label="item.name" is-link to=""></mt-cell>
     </mt-search>
   
     </div>
@@ -43,11 +43,7 @@ export default {
         this.cityList = res;
       });
     },
-    toChild() {
-      debugger;
-      console.log("触发了吗");
-      this.$ref.header.goPage();
-    }
+  
   },
   components: {
     Header
@@ -66,16 +62,40 @@ export default {
       height: 30px;
       line-height: 30px;
     }
+    input[type='search']{
+      text-indent: 10px;
+    }
   }
-  .mint-search-list-warp {
-    padding: 0 10px;
+  .mint-search-list{
+   
+       margin-top: 50px;
+   overflow: hidden;
+   overflow-y: scroll;
   }
+
   .submitbtn {
     height: 40px;
     line-height: 40px;
+   
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
 
-    width: 100%;
-    margin-top: 60px;
+  }
+}
+.city-item{
+  padding:10px 0;
+  border-bottom: 1px solid #e4e4e4;
+  .mint-cell-text{
+    font-size: 17px;
+    line-height: 30px;
+    color: #333;
+  }
+  .mint-cell-label{
+    font-size: 15px;
+    line-height: 26px;
+    color: #999;
   }
 }
 </style>

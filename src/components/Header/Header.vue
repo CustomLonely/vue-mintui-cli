@@ -1,11 +1,17 @@
 <template>
  <div class="header">
-    <mt-header :title="mytitle">    
-    <mt-button  @click="goPage()" icon="back" slot="left"></mt-button>
-    <mt-button slot="right" ></mt-button>
+    <mt-header :title="mytitle">
+      <mt-button  slot="left" v-if="logo">ele.me</mt-button>    
+    <mt-button  @click="goPage" icon="back" slot="left" v-else></mt-button>
+    <mt-button slot="right" v-show="changecity" @click="$router.push('/home')">切换城市</mt-button>
+    
+   
+    <mt-button  slot="right"  v-show="login" @click="$router.push('/login')">登陆|注册</mt-button>
+   
+     
      <slot name="edit"></slot>
         <slot name="msite-title"></slot>
-        <slot name="changecity"></slot>
+       
         <slot name="changeLogin"></slot>
   </mt-header>
  </div>
@@ -13,7 +19,7 @@
 
 <script>
 export default {
-  props: ["mytitle"],
+  props: ["mytitle", "goback", "cityaddress", "addressinfo","changecity","logo","login"],
   data() {
     return {};
   },
@@ -21,6 +27,7 @@ export default {
   mounted() {},
   methods: {
     goPage() {
+     
       this.$router.go(-1);
     }
   }
@@ -36,7 +43,8 @@ export default {
   .mint-header {
     background-color: extract(@blueColor, 8);
   }
-  .mintui-back {
+  .mintui-back,
+  .mint-button-text {
     color: #fff;
   }
   .mint-header-title {
