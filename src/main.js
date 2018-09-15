@@ -32,7 +32,9 @@ import {
   Cell,
   IndexList,
   IndexSection,
-  Search
+  Search,
+  Swipe,
+  SwipeItem
 } from 'mint-ui'
 Vue.component(Header.name, Header)
 Vue.component(Button.name, Button)
@@ -44,6 +46,8 @@ Vue.component(TabItem.name, TabItem);
 Vue.component(IndexList.name, IndexList);
 Vue.component(IndexSection.name, IndexSection);
 Vue.component(Search.name, Search);
+Vue.component(Swipe.name, Swipe);
+Vue.component(SwipeItem.name, SwipeItem);
 //导入网络请求模块
 import { post, get, patch, put } from '@/untils/http'
 

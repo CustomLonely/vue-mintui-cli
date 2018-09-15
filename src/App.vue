@@ -36,6 +36,7 @@ export default {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  height: 100%;
 }
 .router-fade-enter-active,
 .router-fade-leave-active {

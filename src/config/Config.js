@@ -18,6 +18,7 @@ const Config = {
   environment,
   url: apiUrl[environment],
   hd,
+  imgUrl: 'https://fuss10.elemecdn.com'
 };
 
 module.exports = Config;

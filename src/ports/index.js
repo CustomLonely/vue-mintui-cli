@@ -11,7 +11,7 @@ import { post, get, Delete } from '../untils/http'
  *  @param {string} key 用户认证key
  */
 
-export const getWeather = (city) => axios.post('https://www.apiopen.top/weatherApi?city=' + city, {
+export const getWeather = (city) => axios.get('http://wthrcdn.etouch.cn/weather_mini?city=' + city, {
 
 
 })
@@ -60,9 +60,13 @@ export const getAddressInfo = (string) => get('v2/pois/' + string);
 
 /**
  * 食品分类列表
- * 
+ * @param {string}  geohash 经纬度
  */
-export const getFoodEntry = get('v2/index_entry');
+export const getFoodEntry = (geohash) => get('v2/index_entry', {
+    geohash,
+    group_type: '1',
+    'flags[]': 'F'
+});
 
 /***
  * 

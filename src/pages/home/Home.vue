@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div class="homeinfo">
         <Header logo="true" login="true"></Header>
         <mt-cell :title="addressInfo" class="addressinfo">
             <span>{{weather}}℃
                             <img slot="icon" src="../../assets/images/24280.jpg" width="24" height="24">
                         </span>
-            <img slot="icon" src="../../assets/images/24213.jpg" width="24" height="24">
+          
         </mt-cell>
         <mt-cell class="positoncity" title="当前定位城市" value="定位不准时，请在城市列表中选择"></mt-cell>
         <mt-cell class="defaultcity" :title="address"  :to="{path:'/city/'+addressId,query:{name:address}}" is-link>
@@ -19,11 +19,11 @@
              </router-link>
         </ul>
          <mt-cell title="全部城市"></mt-cell>
-         <div class="citywrapper" style="{height:fixBottom+'px'}">
+         <div class="citywrapper" >
             <mt-index-list >
             <mt-index-section  v-for="(item,key) in sortCitys" :key="key" :index="key">
               
-             <ul class="hotcity" >
+             <ul class="totalcity" >
             <router-link :to="{path:'/city/'+v.id,query:{name:v.name}}" tag="li" v-for="(v,i) in item" :key="i">{{v.name}}</router-link>
            </ul>
             </mt-index-section>
@@ -60,16 +60,16 @@ export default {
       const height = document
         .getElementsByClassName("citywrapper")[0]
         .getBoundingClientRect().height;
-      this.fixBottom = this.sortCitys.length > 0 ? height : 0;
-      console.log(this.fixBottom);
+
+      this.fixBottom = this.sortCitys.length > 0 ? height + 260 : height;
     }
   },
   mounted() {
+    console.log(this.fixBottom);
     //定位城市
     getDefaultCity
       .then(
         res => {
-          console.log(res);
           this.addressId = res.id;
           return res;
         },
@@ -87,6 +87,7 @@ export default {
       })
       .then(res => {
         getWeather(res).then(res => {
+          console.log(res);
           let wendu = res.data.data.wendu;
           this.weather = wendu;
         });
@@ -95,7 +96,6 @@ export default {
     getHotCity.then(
       res => {
         this.hotCity = res;
-        console.log(this.hotCity);
       },
       err => {
         console.log(err);
@@ -104,9 +104,9 @@ export default {
     //全部城市
     getTotalCity.then(res => {
       this.totalCity = res;
-      console.log(this.totalCity);
     });
   },
+
   computed: {
     sortCitys() {
       let sortObj = {};
@@ -120,8 +120,9 @@ export default {
       return sortObj;
     }
   },
+
   methods: {},
-    components: {
+  components: {
     Header
   }
 };
@@ -172,9 +173,11 @@ export default {
     }
   }
 }
+
 .hotcity {
   display: flex;
   flex-flow: row wrap;
+  width: 100%;
   li {
     width: 25%;
     text-align: center;
@@ -188,6 +191,37 @@ export default {
     white-space: nowrap; //文本不会换行（单行文本溢出）
     &.hotname {
       color: extract(@blueColor, 1);
+    }
+  }
+}
+.homeinfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  .citywrapper {
+    flex: 1;
+    overflow-y: auto;
+    .mint-indexlist {
+      overflow-y: auto;
+    }
+    .totalcity {
+      display: flex;
+      flex-flow: row wrap;
+      li {
+        width: 25%;
+        text-align: center;
+        border: 1px solid extract(@blackColor, 4);
+        height: 30px;
+        font-size: 17px;
+        line-height: 30px;
+        color: extract(@blackColor, 5);
+        overflow: hidden;
+        text-overflow: ellipsis; //文本溢出显示省略号
+        white-space: nowrap; //文本不会换行（单行文本溢出）
+        &.hotname {
+          color: extract(@blueColor, 1);
+        }
+      }
     }
   }
 }
