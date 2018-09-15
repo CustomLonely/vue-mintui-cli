@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Header :addressinfo="addressInfo" cityaddress="true"></Header>
+        <Header logo="true" login="true"></Header>
         <mt-cell :title="addressInfo" class="addressinfo">
             <span>{{weather}}℃
                             <img slot="icon" src="../../assets/images/24280.jpg" width="24" height="24">
@@ -121,7 +121,7 @@ export default {
     }
   },
   methods: {},
-  components: {
+    components: {
     Header
   }
 };
