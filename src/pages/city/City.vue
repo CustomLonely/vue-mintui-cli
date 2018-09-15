@@ -1,10 +1,7 @@
 <template>
     <div class="container">
-      <div class="head"  @click="toChild">
-        <Header :mytitle="cityName" ref="header">   
+    <Header :mytitle="cityName" goback="true" changecity="true">   
     </Header>
-      </div>
-      
     <mt-search
       v-model="keyword"
       :show='true'
@@ -42,11 +39,6 @@ export default {
         console.log(res);
         this.cityList = res;
       });
-    },
-    toChild() {
-      debugger;
-      console.log("触发了吗");
-      this.$ref.header.goPage();
     }
   },
   components: {

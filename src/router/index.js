@@ -18,7 +18,8 @@ export default [{
         },
         {
             path: '/city/:cityid',
-            component: city
+            component: city,
+            meta: { keepAlive: false },
         },
     ]
 }]

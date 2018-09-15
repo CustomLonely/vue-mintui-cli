@@ -11,14 +11,13 @@ const state = {
   cartList: {},//加入购物车的商品列表
   shopDetail: null,//商家详情信息
   userInfo: null,//用户详情
+  isload: true
 }
 
 const store = new Vuex.Store({
   // 数据：
 
-  state: {
-    isload: true
-  },
+  state,
 
   mutations: {
 
@@ -26,7 +25,8 @@ const store = new Vuex.Store({
 
   getters: {
 
-  }
+  },
+
 })
 
 export default store
