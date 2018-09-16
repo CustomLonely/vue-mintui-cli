@@ -1,9 +1,11 @@
 import App from '../App'
 
-const home = r => require.ensure([], () => r(require('@/pages/home/Home.vue')), 'home')
-const city = r => require.ensure([], () => r(require('@/pages/city/City.vue')), 'city')
-const login = r => require.ensure([], () => r(require('@/pages/other/Login.vue')), 'login');
-const food = r => require.ensure([], () => r(require('@/pages/food/Food.vue')), 'food');
+
+const home = () => import('@/pages/home/Home.vue')
+const city = () => import('@/pages/city/City.vue')
+const login = () => import('@/pages/other/Login.vue')
+const food = () => import('@/pages/food/Food.vue')
+
 export default [{
     path: '/',
     component: App,

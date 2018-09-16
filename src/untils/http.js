@@ -2,6 +2,7 @@ import Vue from 'vue'
 import axios from 'axios';
 import { Indicator } from 'mint-ui';
 Vue.use(Indicator);
+
 import Config from '../config/Config'
 axios.defaults.timeout = 5000;
 axios.defaults.baseURL = Config.url;
@@ -41,6 +42,7 @@ axios.interceptors.response.use(
     //   })
     // }
     Indicator.close();
+  
     return config;
   },
   error => {

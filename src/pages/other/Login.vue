@@ -39,9 +39,15 @@ export default {
       login(this.username, this.password, this.securityCode).then(
         res => {
           console.log(res);
+            if(res.status==0){
+             this.getSecurityCode();
+          }
+         
         },
         err => {
+        
           console.log(err);
+         
         }
       );
       this.getSecurityCode();

@@ -1,6 +1,6 @@
 //导入网络请求模块
 import axios from 'axios';
-
+import {getStore} from '@/untils/untils.js'
 import { post, get, Delete } from '../untils/http'
 
 /***
@@ -56,7 +56,7 @@ export const searchCity = (city_id, keyword, type = 'search') =>
  * 
  */
 
-export const getAddressInfo = (string) => get('v2/pois/' + string);
+export const getAddressBygeohash = (string) => get('v2/pois/' + string);
 
 /**
  * 食品分类列表
@@ -331,7 +331,9 @@ export const postCaptchas = post('v1/captchas');
  * 
  */
 
-export const getUserInfo = get('v1/user');
+export const getUserInfo = get('v1/user', {
+    user_id: getStore('user_id')
+});
 
 /***
  * 登录
@@ -528,3 +530,207 @@ export const adminSignOut = () => get('admin/singout')
  */
 
 export const adminInfo = () => get('admin/info')
+
+/***
+ * 获取某日API请求量
+ * @param {string}   date     日期：格式 2017-05-29 
+ */
+export const getCount = (date) => get(`statis/api/${date}/count`)
+
+/***
+ * 获取所有API请求量
+ * 
+ */
+export const getAllCount = () => get('statis/api/count')
+
+/***
+ * 获取某天用户注册量
+ * @param {string}   date     日期：格式 2017-05-29 
+ */
+
+export const getUserCount = (date) => get(`statis/user/${date}/count`)
+
+/***
+ * 获取所有用户注册量
+ *
+ */
+
+export const getAllUserCount = () => get('v1/users/count')
+
+/***
+ * 获取某天订单数量
+ * @param {string}   date     日期：格式 2017-05-29 
+ */
+
+export const getOrderCount = (date) => get(`statis/order/${date}/count`)
+ 
+/***
+ * 获取所有订单数量
+ *
+ */
+
+export const getAllOrderCount = () => get('bos/orders/count')
+
+/***
+ * 管理员列表
+ *  @param {number}   limit     获取数据数量，默认 20
+ *  @param {number}   offset    跳过数据条数 默认 0 
+ */
+
+export const adminList = (limit = 20, offset = 0) => get('admin/all', {
+    limit,
+    offset
+})
+
+/***
+ * 获取管理员数量
+ * 
+ */
+
+export const adminCount = () => get('admin/count')
+ 
+/***
+ * 获取店铺食品种类
+ *  @param {number}   restaurant_id    餐馆id
+ */
+
+export const shopFoodList = (restaurant_id) => get(`shopping/getcategory/${restaurant_id}`)
+ 
+/***
+ * 获取餐馆数量
+ * 
+ */
+
+export const shopList = () => get('shopping/restaurants/count')
+ 
+/***
+ * 更新餐馆
+ * @param {number}   id              餐馆id
+ * @param {string}   name            餐馆名称
+ * @param {string}   address         餐馆地址
+ * @param {string}   description     餐馆介绍
+ * @param {number}   phone           联系电话
+ * @param {string}   image_path      店铺图片地址
+ * @param {string}   category        店铺分类
+ */
+
+export const updateShop = (id, name, address, description,
+    phone, image_path, category) => post('shopping/updateshop', {
+        id,
+        name,
+        address,
+        description,
+        phone,
+        image_path,
+        category
+    })
+
+/***
+ * 删除餐馆
+ * @param {number}   restaurant_id    餐馆id
+ * 
+ */
+
+export const removeShop = (restaurant_id) => Delete(`shopping/restaurant/${restaurant_id}`)
+ 
+/***
+ * 获取食品列表
+ * @param {number}   limit              获取数据数量，默认 20 
+ * @param {number}   offset             跳过数据条数 默认 0 
+ * @param {number}   restaurant_id      餐馆id
+ */
+
+export const getFoodList = (limit=20, offset=0, restaurant_id) =>
+    get('shopping/v2/foods', {
+        limit,
+        offset,
+        restaurant_id
+    })
+
+/***
+ * 获取食品数量
+ * 
+ */
+
+export const getFoodCount = () => get("shopping/v2/foods/count")
+ 
+/***
+ * 获取食品种类详情
+ * @param {number}   restaurant_id      餐馆id
+ */
+
+export const getFoodSortInfo = (restaurant_id) =>
+    get(`shopping/v2/menu/${restaurant_id}`)
+
+/***
+ * 更新食品
+ * @param {number}   item_id          食品id
+ * @param {string}   name            食品名称
+ * @param {string}   description     食品介绍
+ * @param {string}   image_path      店铺图片地址
+ * @param {number}   restaurant_id    餐馆id
+ * @param {number}   category_id      食品分类id
+ * @param {array}   specfoods         规格：
+ *  [{specs: '默认',packing_fee: 0,price: 20,}]
+ */
+
+export const updateFoodInfo = (item_id, name, description,
+    image_path, restaurant_id, category_id, specfoods) =>
+    post('shopping/v2/updatefood', {
+        item_id, name,
+        description,
+        image_path,
+        restaurant_id,
+        category_id,
+        specfoods
+    })
+ 
+/***
+ * 删除食品
+ * @param {number}   food_id    食品id
+ */
+
+export const removeFood = (food_id) => Delete(`shopping/v2/food/${food_id}`)
+ 
+/***
+ * 获取用户列表
+ * @param {number}   limit              获取数据数量，默认 20 
+ * @param {number}   offset             跳过数据条数 默认 0 
+ */
+
+export const getUserList = (limit=20,offset=0) => get('v1/users/list', {
+    limit,
+    offset
+})
+ 
+/***
+ * 获取订单列表
+ * @param {number}   limit              获取数据数量，默认 20 
+ * @param {number}   offset             跳过数据条数 默认 0 
+ */
+
+export const getOrderList = (limit=20,offset=0) => get('bos/orders', {
+    limit,
+    offset
+})
+ 
+/***
+ * 获取地址信息
+ * @param {number}   address_id              地址id
+ */
+
+export const getAddressInfo = (address_id) => get(`v1/addresse/${address_id}`)
+ 
+/***
+ * 获取用户分布信息
+ * 
+ */
+
+export const userAddress = () => get('v1/user/city/count')
+ 
+/***
+ * 获取某天管理员注册量
+ * @param {string}   date     日期：格式 2017-05-29 
+ */
+
+ export const adminRegisterCount=(date)=>get(`statis/admin/${date}/count`)

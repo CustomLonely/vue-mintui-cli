@@ -1,7 +1,7 @@
 <template>
     <div class="container">
       <div class="head">
-        <Header :mytitle="cityName"  changecity="true">   
+        <Header :mytitle="cityName"  changecity="true" goback="true">   
     </Header>
       </div>
       
@@ -12,8 +12,19 @@
      >
         <mt-button class="submitbtn" @click="searchAddress(cityId,keyword)" type="primary" >提交</mt-button>
         <mt-cell v-if="isCity" title="搜索历史"></mt-cell>
-        <mt-cell class="city-item" v-else v-for="(item,index) in cityList" :key="index" :title="item.address" :label="item.name" is-link 
-        :to="{name:'food',params:{latitude:item.latitude,longitude:item.longitude}}"></mt-cell>
+        <mt-cell class="city-item" v-else
+         v-for="(item,index) in cityList" 
+         :key="index" 
+         :title="item.address" 
+         :label="item.name" 
+         is-link 
+        :to="{path:'/food',
+              query:{
+                latitude:item.latitude,
+                longitude:item.longitude,
+                address:item.name}
+              }">
+        </mt-cell>
     </mt-search>
   
     </div>
@@ -21,6 +32,7 @@
 <script>
 import { Header } from "@/components";
 import { searchCity } from "@/ports";
+
 export default {
   data() {
     return {
@@ -40,6 +52,7 @@ export default {
 
   methods: {
     searchAddress(cityid, keyword) {
+    
       searchCity(cityid, keyword).then(res => {
         console.log(res);
         this.cityList = res;

@@ -2,12 +2,14 @@
  <div class="header">
     <mt-header :title="mytitle">
       <mt-button  slot="left" v-if="logo">ele.me</mt-button>    
-    <mt-button  @click="goPage" icon="back" slot="left" v-else></mt-button>
+    <mt-button  @click="goPage" icon="back" slot="left" v-if="goback"></mt-button>
     <mt-button slot="right" v-show="changecity" @click="$router.push('/home')">切换城市</mt-button>
-    
+      <mt-button  slot="left" v-if="search"><i class="icon icon-magnifier"></i></mt-button>   
    
     <mt-button  slot="right"  v-show="login" @click="$router.push('/login')">登陆|注册</mt-button>
-   
+    <mt-button  slot="right"  v-show="user">
+      <i class="icon icon-tab_icon3"></i>
+    </mt-button>
      
      <slot name="edit"></slot>
         <slot name="msite-title"></slot>
@@ -19,7 +21,7 @@
 
 <script>
 export default {
-  props: ["mytitle", "goback", "cityaddress", "addressinfo","changecity","logo","login"],
+  props: ["mytitle", "goback", "changecity","logo","login","search","user"],
   data() {
     return {};
   },
