@@ -7,7 +7,6 @@ import Config from '../config/Config'
 axios.defaults.timeout = 5000;
 axios.defaults.baseURL = Config.url;
 
-
 //http request 拦截器
 axios.interceptors.request.use(
   config => {
@@ -24,6 +23,7 @@ axios.interceptors.request.use(
     //   config.params = {'token':token}
     // }
     Indicator.open();
+  
     return config;
   },
   error => {
@@ -42,7 +42,7 @@ axios.interceptors.response.use(
     //   })
     // }
     Indicator.close();
-  
+ 
     return config;
   },
   error => {

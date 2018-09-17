@@ -32,6 +32,9 @@ export default {
   top: 0;
   right: 0;
 }
+.spinner{
+  display: none;
+}
 .container {
   display: flex;
   flex-direction: column;

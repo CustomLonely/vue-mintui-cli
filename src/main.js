@@ -19,6 +19,18 @@ const router = new VueRouter({
   routes,
 
 })
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
+router.beforeEach((to,from,next) => {
+  NProgress.start()
+  next()
+})
+ 
+router.afterEach(() => {
+  NProgress.done()
+})
+　　
 import Config from '@/config/Config.js'
 
 
