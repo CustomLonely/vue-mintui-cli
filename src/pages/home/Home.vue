@@ -60,13 +60,13 @@ export default {
         .getElementsByClassName("citywrapper")[0]
         .getBoundingClientRect().height;
 
-      this.fixBottom = this.sortCitys.length > 0 ? height + 260 : height;
+      this.fixBottom = this.sortCitys.length > 0 ? height + 30 : height;
     }
   },
   mounted() {
     console.log(this.fixBottom);
     //定位城市
-     getDefaultCity
+    getDefaultCity
       .then(
         res => {
           this.addressId = res.id;
@@ -184,7 +184,7 @@ export default {
     border: 1px solid extract(@blackColor, 4);
     height: 40px;
     font-size: 17px;
-     line-height: 40px;
+    line-height: 40px;
     color: extract(@blackColor, 5);
     overflow: hidden;
     text-overflow: ellipsis; //文本溢出显示省略号
@@ -200,8 +200,8 @@ export default {
   flex-direction: column;
   .citywrapper {
     flex: 1;
-    overflow-y: auto;
-    .mint-indexlist {
+
+    .mint-indexlist-navlist {
       overflow-y: auto;
     }
     .totalcity {
@@ -211,8 +211,8 @@ export default {
         width: 25%;
         text-align: center;
         border: 1px solid extract(@blackColor, 4);
-       height: 40px;
-       line-height: 40px;
+        height: 40px;
+        line-height: 40px;
         font-size: 17px;
         color: extract(@blackColor, 5);
         overflow: hidden;

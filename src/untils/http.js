@@ -7,7 +7,8 @@ import Config from '../config/Config'
 axios.defaults.timeout = 5000;
 axios.defaults.baseURL = Config.url;
 
-
+let loading = false;
+let count = 0;
 //http request 拦截器
 axios.interceptors.request.use(
   config => {
@@ -23,6 +24,7 @@ axios.interceptors.request.use(
     // if(token){
     //   config.params = {'token':token}
     // }
+    loading = true;
     Indicator.open();
     return config;
   },
@@ -42,7 +44,7 @@ axios.interceptors.response.use(
     //   })
     // }
     Indicator.close();
-  
+    loading = false;
     return config;
   },
   error => {
@@ -50,7 +52,7 @@ axios.interceptors.response.use(
   }
 )
 
-
+export { loading }
 /**
  * 封装get方法
  * @param url
@@ -61,7 +63,13 @@ axios.interceptors.response.use(
 export function get(url, params = {}) {
   return new Promise((resolve, reject) => {
     axios.get(url, {
-      params: params
+      params: params,
+      onUploadProgress(a) {
+        console.log(a)
+      },
+      onDownloadProgress(a) {
+        console.log(a)
+      }
     })
       .then(response => {
         resolve(response.data);

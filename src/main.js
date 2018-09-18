@@ -35,8 +35,11 @@ import {
   Search,
   Swipe,
   SwipeItem,
-  
-} from 'mint-ui'
+  Progress
+} from 'mint-ui';
+
+
+Vue.component(Progress.name, Progress);
 Vue.component(Header.name, Header)
 Vue.component(Button.name, Button)
 Vue.component(Field.name, Field)
@@ -51,7 +54,7 @@ Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
 
 //导入网络请求模块
-import { post, get, patch, put } from '@/untils/http'
+import { post, get, patch, put, loading } from '@/untils/http'
 
 
 //定义全局变量
@@ -67,8 +70,8 @@ window.Api = {
   post,
   get,
   patch,
-  put
-
+  put,
+  loading
 }
 
 

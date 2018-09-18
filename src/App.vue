@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <mt-progress :value="count" :bar-height="5" v-show="loading"></mt-progress>
 	<transition name="router-fade" mode="out-in">
 			<keep-alive>
 			    <router-view v-if="$route.meta.keepAlive"></router-view>
@@ -12,15 +13,19 @@
 </template>
 
 <script>
-import Login from "./pages/other/Login.vue";
 export default {
   data() {
     return {
       content: "密码登录",
-      isload: false
+      loading: false,
+      count: 0
     };
   },
-  components: { Login }
+  watch: {},
+  created() {
+    console.log(Api.loading);
+    this.loading = Api.loading;
+  }
 };
 </script>
 
