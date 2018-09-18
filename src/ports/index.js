@@ -80,20 +80,23 @@ export const getFoodEntry = (geohash) => get('v2/index_entry', {
  */
 
 export const restaurants =
-    (latitude, longitude, offset = 0, limit = 20,
-        restaurant_category_id, order_by = 4, delivery_mode,
-        support_ids, restaurant_category_ids) =>
-        get('shopping/restaurants', {
-            latitude,
-            longitude,
-            offset,
-            limit,
-            restaurant_category_id,
-            order_by,
-            delivery_mode,
-            support_ids,
-            restaurant_category_ids
-        })
+    (obj) => {
+
+        let params = {
+            latitude: obj.latitude,
+            longitude: obj.longitude,
+            offset: obj.offset || 0,
+            limit: obj.limit || 20,
+            restaurant_category_id: obj.restaurant_category_id,
+            order_by: obj.order_by || 4,
+            delivery_mode: obj.delivery_mode,
+            support_ids: obj.support_ids,
+            restaurant_category_ids: obj.restaurant_category_ids
+        };
+        return get('shopping/restaurants', params)
+
+    }
+
 
 /**
  * 搜索餐馆

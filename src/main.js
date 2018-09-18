@@ -19,6 +19,7 @@ const router = new VueRouter({
   routes,
 
 })
+
 import Config from '@/config/Config.js'
 
 
@@ -35,11 +36,11 @@ import {
   Search,
   Swipe,
   SwipeItem,
-  Progress
+  Loadmore
 } from 'mint-ui';
 
 
-Vue.component(Progress.name, Progress);
+Vue.component(Loadmore.name, Loadmore);
 Vue.component(Header.name, Header)
 Vue.component(Button.name, Button)
 Vue.component(Field.name, Field)
@@ -70,8 +71,7 @@ window.Api = {
   post,
   get,
   patch,
-  put,
-  loading
+  put
 }
 
 

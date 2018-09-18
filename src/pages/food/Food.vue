@@ -21,28 +21,27 @@
 </template>
 <script>
 import { Header } from "@/components";
-import { getFoodEntry,restaurants } from "@/ports";
+import { getFoodEntry, restaurants } from "@/ports";
 export default {
   data() {
     return {
       menulist: [], //菜单
       imgUrl: Api.Config.imgUrl, //图片服务器
-      latitude: "", //经度
-      longitude:"",//纬度
+
+      params: {},
       addressName: ""
     };
   },
   created() {
-   
-    this.latitude = this.$route.query.latitude;
-    this.longitude=this.$route.query.longitude;
-     this.addressName = this.$route.query.address;
+    this.params.latitude = this.$route.query.latitude;
+    this.params.longitude = this.$route.query.longitude;
+    this.params.limit = 40;
+    this.addressName = this.$route.query.address;
   },
   mounted() {
     this.getMenulist();
-   
-    this.getNearbyShop(this.latitude,this.longitude,this.addressName);
-    
+
+    this.getNearbyShop(this.params);
   },
   components: {
     Header
@@ -61,8 +60,8 @@ export default {
       this.menulist = newMenulist;
       console.log(this.menulist);
     },
-    async getNearbyShop(latitude,longitude,addressName){
-      let res=await restaurants(latitude,longitude,addressName);
+    async getNearbyShop(params) {
+      let res = await restaurants(params);
       console.log(res);
     }
   },

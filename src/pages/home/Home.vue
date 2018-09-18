@@ -86,8 +86,8 @@ export default {
       })
       .then(res => {
         getWeather(res).then(res => {
-          console.log(res);
           let wendu = res.data.data.wendu;
+          console.log(res);
           this.weather = wendu;
         });
       });
@@ -178,12 +178,14 @@ export default {
   display: flex;
   flex-flow: row wrap;
   width: 100%;
+  height: 20vw;
   li {
     width: 25%;
     text-align: center;
     border: 1px solid extract(@blackColor, 4);
     height: 40px;
     font-size: 17px;
+    box-sizing: border-box;
     line-height: 40px;
     color: extract(@blackColor, 5);
     overflow: hidden;

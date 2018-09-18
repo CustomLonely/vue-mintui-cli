@@ -1,6 +1,6 @@
 <template>
   <div class="main" v-if='$store.state.isload'>
-     <Header :mytitle="content" ref='header' @click="goPage"></Header>
+     <Header :mytitle="content" goback="true" ref='header' @click="goPage"></Header>
     <mt-field label="用户名" placeholder="请输入用户名" v-model="username" disableClear></mt-field>
     <mt-field label="密码" placeholder="请输入密码" type="password" v-model="password" disableClear>
       <mt-switch v-model="showPassword" @change="toggleShow"></mt-switch>
@@ -66,7 +66,7 @@ export default {
 
 <style lang="less">
 .main {
-  margin-top: 15px;
+
   display: flex;
   flex-direction: column;
   height: 100%;

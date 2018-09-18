@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <mt-progress :value="count" :bar-height="5" v-show="loading"></mt-progress>
+   
 	<transition name="router-fade" mode="out-in">
 			<keep-alive>
 			    <router-view v-if="$route.meta.keepAlive"></router-view>
@@ -16,16 +16,10 @@
 export default {
   data() {
     return {
-      content: "密码登录",
-      loading: false,
-      count: 0
+      content: "密码登录"
     };
   },
-  watch: {},
-  created() {
-    console.log(Api.loading);
-    this.loading = Api.loading;
-  }
+  watch: {}
 };
 </script>
 
@@ -36,6 +30,9 @@ export default {
   bottom: 0;
   top: 0;
   right: 0;
+}
+.spinner {
+  display: none;
 }
 .container {
   display: flex;
