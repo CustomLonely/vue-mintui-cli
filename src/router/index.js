@@ -15,7 +15,7 @@ export default [{
             component: home,
             meta: { keepAlive: true },
         },
-    
+
         {
             path: '/home',
             component: home,

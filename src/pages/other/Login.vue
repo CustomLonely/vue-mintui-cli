@@ -1,5 +1,5 @@
 <template>
-  <div class="main" v-if='$store.state.isload'>
+  <div class="main" >
      <Header :mytitle="content" goback="true" ref='header' @click="goPage"></Header>
     <mt-field label="用户名" placeholder="请输入用户名" v-model="username" disableClear></mt-field>
     <mt-field label="密码" placeholder="请输入密码" type="password" v-model="password" disableClear>
@@ -39,15 +39,12 @@ export default {
       login(this.username, this.password, this.securityCode).then(
         res => {
           console.log(res);
-            if(res.status==0){
-             this.getSecurityCode();
+          if (res.status == 0) {
+            this.getSecurityCode();
           }
-         
         },
         err => {
-        
           console.log(err);
-         
         }
       );
       this.getSecurityCode();
@@ -66,7 +63,6 @@ export default {
 
 <style lang="less">
 .main {
-
   display: flex;
   flex-direction: column;
   height: 100%;

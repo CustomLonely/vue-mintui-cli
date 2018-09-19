@@ -36,7 +36,8 @@ import {
   Search,
   Swipe,
   SwipeItem,
-  Loadmore
+  Loadmore,
+  Lazyload
 } from 'mint-ui';
 
 
@@ -53,9 +54,9 @@ Vue.component(IndexSection.name, IndexSection);
 Vue.component(Search.name, Search);
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
-
+Vue.use(Lazyload);
 //导入网络请求模块
-import { post, get, patch, put, loading } from '@/untils/http'
+import { post, get, patch, put } from '@/untils/http'
 
 
 //定义全局变量

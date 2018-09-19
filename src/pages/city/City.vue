@@ -1,62 +1,104 @@
 <template>
-    <div class="container">
-      <div class="head">
-        <Header :mytitle="cityName"  changecity="true" goback="true">   
-    </Header>
-      </div>
-      
-    <mt-search
-      v-model="keyword"
-      :show='true'
-      placeholder="输入学校、商务楼、地址"
-     >
-        <mt-button class="submitbtn" @click="searchAddress(cityId,keyword)" type="primary" >提交</mt-button>
-        <mt-cell v-if="isCity" title="搜索历史"></mt-cell>
-        <mt-cell class="city-item" v-else
-         v-for="(item,index) in cityList" 
-         :key="index" 
-         :title="item.address" 
-         :label="item.name" 
-         is-link 
-        :to="{path:'/food',
-              query:{
-                latitude:item.latitude,
-                longitude:item.longitude,
-                address:item.name}
-              }">
-        </mt-cell>
-    </mt-search>
-  
+  <div class="container">
+    <div class="head">
+      <Header :mytitle="cityName" changecity="true" goback="true">
+      </Header>
     </div>
+    <form v-on:submit.prevent>
+      <mt-search v-model="keyword" :show='true' placeholder="输入学校、商务楼、地址" @keyup.enter="searchAddress(cityId,keyword)">
+        <mt-button class="submitbtn" @click="searchAddress(cityId,keyword)" type="primary">提交</mt-button>
+        <mt-cell v-if="historytitle" title="搜索历史"></mt-cell>
+        <div class="city-item"  v-else @click="nextPage(index,item.geohash, item.name)"   v-for="(item,index) in cityList" 
+        :key="index" >
+           <mt-cell 
+      :title="item.address" 
+        :label="item.name" 
+    
+        >
+        </mt-cell>
+        <div class="search_none_place">很抱歉！无搜索结果</div>
+        </div>
+       
+      </mt-search>
+    </form>
+  </div>
 </template>
 <script>
 import { Header } from "@/components";
 import { searchCity } from "@/ports";
-
+import { setStore, getStore, removeStore } from "@/untils/untils";
 export default {
   data() {
     return {
       cityId: "",
       cityName: "",
-      historyList: [],
       cityList: [],
       keyword: "", //搜索关键词
-      isCity: false //// 搜索无结果，显示提示信息
+      isCity: false, // 搜索无结果，显示提示信息
+      historyList: [], // 历史搜索记录
+      historytitle: true // 默认显示搜索历史头部，点击搜索后隐藏
     };
   },
   created() {
     this.cityId = this.$route.params.cityid;
     this.cityName = this.$route.query.name;
-    console.log(this.$route);
+    console.log(this.cityList);
   },
-
+  mounted() {
+    this.initData();
+  },
   methods: {
-    searchAddress(cityid, keyword) {
-    
-      searchCity(cityid, keyword).then(res => {
-        console.log(res);
-        this.cityList = res;
+    initData() {
+      if (getStore("placehistory")) {
+        this.cityList = JSON.parse(getStore("placehistory"));
+      } else {
+        this.cityList = [];
+      }
+    },
+
+    async searchAddress(cityid, keyword) {
+      let res = await searchCity(cityid, keyword);
+      this.historytitle = false;
+      this.cityList = res;
+      this.isCity = res.length ? false : true;
+    },
+
+    /**
+     * 点击搜索结果进入下一页面时进行判断是否已经有一样的历史记录
+     * 如果没有则新增，如果有则不做重复储存，判断完成后进入下一页
+     */
+    nextPage(index, geohash, address) {
+      console.log("触发");
+      let history = getStore("placehistory");
+      let selecthistory = this.cityList[index];
+      if (history) {
+        let checkrepeat = false;
+        this.historyList = JSON.parse(history);
+        this.historyList.forEach(item => {
+          if (item.geohash == geohash) {
+            checkrepeat = true;
+          }
+        });
+        if (!checkrepeat) {
+          this.historyList.push(selecthistory);
+        }
+      } else {
+        this.isCity = true;
+        this.historyList.push(selecthistory);
+      }
+      setStore("placehistory", this.historyList);
+      this.$router.push({
+        name: "food",
+        query: {
+          geohash,
+          address
+        }
       });
+    },
+    //清除历史纪录
+    clearAll() {
+      removeStore("placehistory");
+      this.initData();
     }
   },
   components: {
@@ -66,7 +108,6 @@ export default {
 </script>
 <style lang="less">
 @import "../../style/basic.less";
-
 .mint-search {
   background-color: extract(@whiteColor, 1);
   .mint-searchbar {
@@ -83,10 +124,9 @@ export default {
   .mint-search-list {
     margin-top: 50px;
     overflow: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 100%;
   }
-
   .submitbtn {
     height: 40px;
     line-height: 40px;
@@ -109,6 +149,10 @@ export default {
     line-height: 26px;
     color: #999;
   }
+}
+.search_none_place {
+  margin: 0 auto;
+  font-size: 16px;
 }
 </style>
 

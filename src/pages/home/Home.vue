@@ -1,6 +1,6 @@
 <template>
     <div class="homeinfo">
-        <Header logo="true" login="true"></Header>
+         <Header logo="true" :login="$store.state.isload==false" :user="$store.state.isload==true"></Header>
         <mt-cell :title="addressInfo" class="addressinfo">
            
             <span>{{weather}}℃</span>
@@ -179,6 +179,7 @@ export default {
   flex-flow: row wrap;
   width: 100%;
   height: 20vw;
+  min-width: 75px;
   li {
     width: 25%;
     text-align: center;

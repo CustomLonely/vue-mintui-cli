@@ -1,12 +1,12 @@
 <template>
     <div class="foodinfo">
-      <Header :mytitle="addressName" search="true" user="true"></Header>
+      <Header :mytitle="addressName" search="true" :login="$store.state.isload==false" :user="$store.state.isload==true"></Header>
         <mt-swipe :auto="0" class="navbar">
 
                 <mt-swipe-item v-for="(item,index) in menulist" :key="index">
                     <ul class="foodmenu">
                         <li v-for="(v,i) in item[0]" :key="i">
-                            <img :src="imgUrl+v.image_url" >
+                            <img v-lazy.container="imgUrl+v.image_url" >
                             <span>{{v.title}}</span>
                         </li>
                     </ul>

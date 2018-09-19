@@ -11,7 +11,7 @@ const state = {
   cartList: {},//加入购物车的商品列表
   shopDetail: null,//商家详情信息
   userInfo: null,//用户详情
-  isload: true
+  isload: false
 }
 
 const store = new Vuex.Store({
