@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  props: ["mytitle", "goback", "changecity","logo","login","search","user"],
+  props: ["mytitle", "goback", "changecity", "logo", "login", "search", "user"],
   data() {
     return {};
   },
@@ -29,7 +29,6 @@ export default {
   mounted() {},
   methods: {
     goPage() {
-     
       this.$router.go(-1);
     }
   }
