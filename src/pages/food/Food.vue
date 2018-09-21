@@ -27,26 +27,31 @@ export default {
     return {
       menulist: [], //菜单
       imgUrl: Api.Config.imgUrl, //图片服务器
-
+      geohash: "",
       params: {},
       addressName: ""
     };
   },
   created() {
-    this.params.latitude = this.$route.query.latitude;
-    this.params.longitude = this.$route.query.longitude;
+    this.geohash = this.$route.params.geohash;
+    console.log(this.$route);
+  },
+  beforeMount() {
+    let arr = this.geohash.split(",");
+    this.params.latitude = arr[0];
+    this.params.longitude = arr[1];
     this.params.limit = 40;
-    this.addressName = this.$route.query.address;
+    this.addressName = this.$route.params.address;
   },
   mounted() {
     this.getMenulist();
-
     this.getNearbyShop(this.params);
   },
   components: {
     Header
   },
   methods: {
+    //navbar菜单
     async getMenulist() {
       let res = await getFoodEntry(this.geohash);
 
@@ -58,8 +63,8 @@ export default {
         newMenulist.push(result);
       }
       this.menulist = newMenulist;
-      console.log(this.menulist);
     },
+    //商家列表
     async getNearbyShop(params) {
       let res = await restaurants(params);
       console.log(res);

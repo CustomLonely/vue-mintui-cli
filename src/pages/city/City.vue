@@ -5,10 +5,10 @@
       </Header>
     </div>
     <form v-on:submit.prevent>
-      <mt-search v-model="keyword" :show='true' placeholder="输入学校、商务楼、地址" @keyup.enter="searchAddress(cityId,keyword)">
+      <mt-search v-model="keyword" :show='true' placeholder="输入学校、商务楼、地址" @keyup.enter="searchAddress">
         <mt-button class="submitbtn" @click="searchAddress(cityId,keyword)" type="primary">提交</mt-button>
         <mt-cell v-if="historytitle" title="搜索历史"></mt-cell>
-        <div class="city-item"  v-else @click="nextPage(index,item.geohash, item.name)"   v-for="(item,index) in cityList" 
+        <div class="city-item"  @click="nextPage(index,item.geohash, item.name)"   v-for="(item,index) in cityList" 
         :key="index" >
            <mt-cell 
       :title="item.address" 
@@ -16,9 +16,10 @@
     
         >
         </mt-cell>
-        <div class="search_none_place">很抱歉！无搜索结果</div>
+        
         </div>
-       
+        <div v-if="historyList.length>0" class="search_none_place" @click="clearAll">清空历史纪录</div>
+        <div v-if="isCity" class="search_none_place">很抱歉！无搜索结果</div>
       </mt-search>
     </form>
   </div>
@@ -39,14 +40,14 @@ export default {
       historytitle: true // 默认显示搜索历史头部，点击搜索后隐藏
     };
   },
+
   created() {
     this.cityId = this.$route.params.cityid;
     this.cityName = this.$route.query.name;
-    console.log(this.cityList);
-  },
-  mounted() {
     this.initData();
+    console.log(this.cityList, getStore("placehistory"));
   },
+  mounted() {},
   methods: {
     initData() {
       if (getStore("placehistory")) {
@@ -56,11 +57,13 @@ export default {
       }
     },
 
-    async searchAddress(cityid, keyword) {
-      let res = await searchCity(cityid, keyword);
-      this.historytitle = false;
-      this.cityList = res;
-      this.isCity = res.length ? false : true;
+    async searchAddress() {
+      if (this.keyword && this.keyword.length > 0) {
+        let res = await searchCity(this.cityid, this.keyword);
+        this.historytitle = false;
+        this.cityList = res;
+        this.isCity = res.length ? false : true;
+      }
     },
 
     /**
@@ -89,7 +92,7 @@ export default {
       setStore("placehistory", this.historyList);
       this.$router.push({
         name: "food",
-        query: {
+        params: {
           geohash,
           address
         }
@@ -138,7 +141,7 @@ export default {
 }
 .city-item {
   padding: 10px 0;
-  border-bottom: 1px solid #e4e4e4;
+
   .mint-cell-text {
     font-size: 17px;
     line-height: 30px;
@@ -149,10 +152,18 @@ export default {
     line-height: 26px;
     color: #999;
   }
+  .mint-cell-wrapper {
+    border-bottom: 1px solid #e4e4e4;
+  }
 }
+
 .search_none_place {
   margin: 0 auto;
+  width: 100%;
+  line-height: 28px;
+  text-align: center;
   font-size: 16px;
+  color: extract(@blueColor, 1);
 }
 </style>
 

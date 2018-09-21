@@ -179,7 +179,7 @@ export default {
   flex-flow: row wrap;
   width: 100%;
   height: 20vw;
-  min-width: 75px;
+  min-height: 80px;
   li {
     width: 25%;
     text-align: center;

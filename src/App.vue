@@ -30,6 +30,10 @@ export default {
   bottom: 0;
   top: 0;
   right: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
 }
 .spinner {
   display: none;
