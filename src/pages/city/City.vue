@@ -18,7 +18,7 @@
         </mt-cell>
         
         </div>
-        <div v-if="historyList.length>0" class="search_none_place" @click="clearAll">清空历史纪录</div>
+        <div v-if="isHistory" class="search_none_place" @click="clearAll">清空历史纪录</div>
         <div v-if="isCity" class="search_none_place">很抱歉！无搜索结果</div>
       </mt-search>
     </form>
@@ -37,13 +37,14 @@ export default {
       keyword: "", //搜索关键词
       isCity: false, // 搜索无结果，显示提示信息
       historyList: [], // 历史搜索记录
-      historytitle: true // 默认显示搜索历史头部，点击搜索后隐藏
+      historytitle: true,// 默认显示搜索历史头部，点击搜索后隐藏,
+      isHistory:false
     };
   },
 
   created() {
     this.cityId = this.$route.params.cityid;
-    this.cityName = this.$route.query.name;
+    this.cityName = this.$route.params.name;
     this.initData();
     console.log(this.cityList, getStore("placehistory"));
   },
@@ -52,8 +53,10 @@ export default {
     initData() {
       if (getStore("placehistory")) {
         this.cityList = JSON.parse(getStore("placehistory"));
+          this.isHistory = this.cityList.length>0 ? true : false;
       } else {
         this.cityList = [];
+        this.isCity=false;
       }
     },
 
@@ -62,7 +65,8 @@ export default {
         let res = await searchCity(this.cityid, this.keyword);
         this.historytitle = false;
         this.cityList = res;
-        this.isCity = res.length ? false : true;
+        this.isHistory=false;
+        this.isCity=res.length>0?true:false;
       }
     },
 

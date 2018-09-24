@@ -5,7 +5,7 @@ import 'babel-polyfill'
 import Es6Promise from 'es6-promise'
 import 'lib-flexible/flexible.js'
 Es6Promise.polyfill()
-
+import moment from 'moment';
 import Vue from 'vue'
 
 // 导入 vuex
@@ -37,7 +37,10 @@ import {
   Swipe,
   SwipeItem,
   Loadmore,
-  Lazyload
+  Lazyload,
+  TabContainer,
+  TabContainerItem
+
 } from 'mint-ui';
 
 
@@ -55,16 +58,19 @@ Vue.component(Search.name, Search);
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
 Vue.use(Lazyload);
+Vue.component(TabContainer.name, TabContainer);
+Vue.component(TabContainerItem.name, TabContainerItem);
+
 //导入网络请求模块
 import { post, get, patch, put } from '@/untils/http'
 
 
 //定义全局变量
 
-Vue.prototype.$post = post;
-Vue.prototype.$get = get;
-Vue.prototype.$patch = patch;
-Vue.prototype.$put = put;
+// Vue.prototype.$post = post;
+// Vue.prototype.$get = get;
+// Vue.prototype.$patch = patch;
+// Vue.prototype.$put = put;
 
 
 window.Api = {
@@ -72,7 +78,8 @@ window.Api = {
   post,
   get,
   patch,
-  put
+  put,
+  moment
 }
 
 
