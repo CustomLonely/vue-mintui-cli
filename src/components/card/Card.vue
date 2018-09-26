@@ -3,6 +3,7 @@
         <div class="cardleft">
             <div class="imgbox">
                 <img :src="imgurl" alt="" class="cardimg">
+                
             </div>
             <div>
                 <p>{{shopname}}</p>

@@ -57,27 +57,27 @@ export default {
       params: {},
       addressName: "",
       selected: "外卖",
-      tabBarList:[
-        { id:"外卖",
-          url:require('../../assets/images/tabbar/food.png'),
-          activeurl:require('../../assets/images/tabbar/food_active.png'),
-        
+      tabBarList: [
+        {
+          id: "外卖",
+          url: require("../../assets/images/tabbar/food.png"),
+          activeurl: require("../../assets/images/tabbar/food_active.png")
         },
-         { id:"订单",
-          url:require('../../assets/images/tabbar/order.png'),
-          activeurl:require('../../assets/images/tabbar/order_active.png'),
-        
+        {
+          id: "订单",
+          url: require("../../assets/images/tabbar/order.png"),
+          activeurl: require("../../assets/images/tabbar/order_active.png")
         },
-         { id:"发现",
-          url:require('../../assets/images/tabbar/search.png'),
-          activeurl:require('../../assets/images/tabbar/search_active.png'),
-        
+        {
+          id: "发现",
+          url: require("../../assets/images/tabbar/search.png"),
+          activeurl: require("../../assets/images/tabbar/search_active.png")
         },
-         { id:"我的",
-          url:require('../../assets/images/tabbar/user.png'),
-          activeurl:require('../../assets/images/tabbar/user_active.png'),
-         
-        },
+        {
+          id: "我的",
+          url: require("../../assets/images/tabbar/user.png"),
+          activeurl: require("../../assets/images/tabbar/user_active.png")
+        }
       ]
     };
   },
@@ -175,13 +175,15 @@ export default {
   }
   .mint-tab-item-label {
     color: extract(@blackColor, 3);
+    text-decoration: none !important;
   }
 }
 .is-selected {
   outline: none;
- 
+
   p {
     color: extract(@blueColor, 1);
+    text-decoration: none !important;
   }
 }
 </style>
