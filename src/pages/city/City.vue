@@ -46,7 +46,7 @@ export default {
     this.cityId = this.$route.params.cityid;
     this.cityName = this.$route.params.name;
     this.initData();
-    console.log(this.cityList, getStore("placehistory"));
+    console.log(this.$route);
   },
   mounted() {},
   methods: {

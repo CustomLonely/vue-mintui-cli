@@ -6,11 +6,11 @@
       <span slot="icon"> <i class="icon icon-ziyuandoctor_icon5"></i></span>
     </mt-cell>
     <mt-cell class="positoncity" title="当前定位城市" value="定位不准时，请在城市列表中选择"></mt-cell>
-    <mt-cell class="defaultcity" :title="address" :to="{path:'/city/'+addressId,query:{name:address}}" is-link>
+    <mt-cell class="defaultcity" :title="address" :to="{name:'city',params:{cityid:addressId,name:address}}" is-link>
     </mt-cell>
     <mt-cell title="热门城市"></mt-cell>
     <ul class="hotcity">
-      <router-link :to="{path:'/city/'+item.id,query:{name:item.name}}" tag="li" v-for="(item,index) in hotCity" :key="index" class="hotname">
+      <router-link :to="{name:'city',params:{cityid:addressId,name:address}}" tag="li" v-for="(item,index) in hotCity" :key="index" class="hotname">
         {{item.name}}
       </router-link>
     </ul>
@@ -19,7 +19,7 @@
       <mt-index-list>
         <mt-index-section v-for="(item,key) in sortCitys" :key="key" :index="key">
           <ul class="totalcity">
-            <router-link :to="{path:'/city/'+v.id,params:{name:v.name}}" tag="li" v-for="(v,i) in item" :key="i">{{v.name}}</router-link>
+            <router-link :to="{name:'city',params:{cityid:addressId,name:address}}" tag="li" v-for="(v,i) in item" :key="i">{{v.name}}</router-link>
           </ul>
         </mt-index-section>
       </mt-index-list>

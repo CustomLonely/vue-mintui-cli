@@ -38,6 +38,9 @@ export default {
 .spinner {
   display: none;
 }
+.icon{
+  color: #fff;
+}
 .container {
   display: flex;
   flex-direction: column;
