@@ -11,7 +11,7 @@ import Vue from 'vue'
 // 导入 vuex
 import store from '@/store'
 
-import App from './App'
+
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 import routes from '@/router'
@@ -22,6 +22,9 @@ const router = new VueRouter({
 
 import Config from '@/config/Config.js'
 
+//导入全局过滤器
+
+import '@/filters'
 
 import {
   Header,
@@ -64,7 +67,17 @@ Vue.component(TabContainerItem.name, TabContainerItem);
 //导入网络请求模块
 import { post, get, patch, put } from '@/untils/http'
 
+//导入存储方法
 
+import {
+  setStore,
+  getStore,
+  removeStore,
+  setData,
+  getData,
+  removeData,
+  isRouteData
+} from '@/untils/untils'
 //定义全局变量
 
 // Vue.prototype.$post = post;
@@ -79,7 +92,14 @@ window.Api = {
   get,
   patch,
   put,
-  moment
+  moment,
+  setStore,
+  getStore,
+  removeStore,
+  setData,
+  getData,
+  isRouteData,
+  removeData
 }
 
 

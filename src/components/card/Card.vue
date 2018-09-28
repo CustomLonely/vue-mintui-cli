@@ -1,28 +1,30 @@
 <template>
-    <div class="carditem">
-        <div class="cardleft">
-            <div class="imgbox">
-                <img :src="imgurl" alt="" class="cardimg">
-                
+    <ul>
+        <router-link to="" tag="li" class="carditem" v-for="(item,index) in shopList" :key="index">
+            <div class="cardleft">
+                <div class="imgbox">
+                    <img :src="item.image_path|src" alt="" class="cardimg">
+                </div>
+                <div>
+                    <p>{{name}}</p>
+                    <p>{{count}}</p>
+                    <p></p>
+                </div>
             </div>
-            <div>
-                <p>{{shopname}}</p>
-                <p>{{count}}</p>
+            <div class="cardright">
+                <p></p>
+                <p></p>
                 <p></p>
             </div>
-        </div>
-        <div class="cardright">
-            <p></p>
-            <p></p>
-            <p></p>
-        </div>
-    </div>
+        </router-link>
+    </ul>
 </template>
 <script>
 export default {
-  props: ["imgurl", "shopname", "count"],
   data() {
-    return {};
+    return {
+      shopList: []
+    };
   }
 };
 </script>

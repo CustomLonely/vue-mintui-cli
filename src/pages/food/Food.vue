@@ -4,12 +4,20 @@
       <mt-tab-container class="page-tabbar-tab-container" v-model="selected">
         <mt-tab-container-item id="外卖">
           <div class="foodinfo">
-            <Header :mytitle="addressName" search="true" :login="$store.state.isload==false" :user="$store.state.isload==true"></Header>
+      
+            <Header 
+            :mytitle="addressName" 
+            :search="$store.state.search==true"
+           
+            :login="$store.state.isload==false" 
+            :user="$store.state.isload==true">
+            
+            </Header>
             <mt-swipe :auto="0" class="navbar">
               <mt-swipe-item v-for="(item,index) in menulist" :key="index">
                 <ul class="foodmenu">
                   <li v-for="(v,i) in item[0]" :key="i">
-                    <img v-lazy.container="imgUrl+v.image_url">
+                    <img :src="v.image_url|url">
                     <span>{{v.title}}</span>
                   </li>
                 </ul>
@@ -52,8 +60,9 @@ export default {
   data() {
     return {
       menulist: [], //菜单
-      imgUrl: Api.Config.imgUrl, //图片服务器
+
       geohash: "",
+      search: true,
       params: {},
       addressName: "",
       selected: "外卖",
@@ -82,15 +91,14 @@ export default {
     };
   },
   created() {
-    this.geohash = this.$route.params.geohash;
-    console.log(this.$route);
+    this.geohash = Api.isRouteData("geohash", this.$route.params.geohash);
+    this.addressName = Api.isRouteData("address", this.$route.params.address);
   },
   beforeMount() {
     let arr = this.geohash.split(",");
     this.params.latitude = arr[0];
     this.params.longitude = arr[1];
     this.params.limit = 40;
-    this.addressName = this.$route.params.address;
   },
   mounted() {
     this.getMenulist();
@@ -185,6 +193,11 @@ export default {
     color: extract(@blueColor, 1);
     text-decoration: none !important;
   }
+}
+img[lazy="loading"] {
+  height: 25vw;
+  width: 25vw;
+  background: url("../../assets/images/tabbar/food.svg") no-repeat fixed center;
 }
 </style>
 

@@ -1,11 +1,10 @@
 <template>
  <div class="header">
     <mt-header :title="mytitle">
-      <mt-button  slot="left" v-if="logo">ele.me</mt-button>    
+    <mt-button  slot="left" v-if="logo">ele.me</mt-button>    
     <mt-button  @click="goPage" icon="back" slot="left" v-if="goback"></mt-button>
-    <mt-button slot="right" v-if="changecity" @click="$router.push('/home')">切换城市</mt-button>
-      <mt-button  slot="left" v-if="search"><i class="icon icon-magnifier"></i></mt-button>   
-   
+    <mt-button slot="right"  v-if="changecity" @click="$router.push('/home')">切换城市</mt-button>
+    <mt-button  slot="left" v-show="search"><i class="icon icon-magnifier"></i></mt-button>   
     <mt-button  slot="right"  v-if="login" @click="$router.push('/login')">登陆|注册</mt-button>
     <mt-button  slot="right"  v-if="user">
       <i class="icon icon-tab_icon3"></i>

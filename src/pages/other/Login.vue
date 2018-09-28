@@ -52,7 +52,6 @@ export default {
     toggleShow() {},
     goPage() {
       this.$router.back(-1);
-      console.log(this.$router);
     }
   },
   components: {

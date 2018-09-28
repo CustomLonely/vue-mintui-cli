@@ -38,7 +38,7 @@ export default {
 .spinner {
   display: none;
 }
-.icon{
+.icon {
   color: #fff;
 }
 .container {

@@ -22,7 +22,7 @@ export default [{
             meta: { keepAlive: true },
         },
         {
-            path: '/city/:cityid',
+            path: '/city',
             component: city,
             name: 'city',
             meta: { keepAlive: false },
@@ -35,7 +35,7 @@ export default [{
             path: '/food',
             name: 'food',
             component: food,
-            meta: { keepAlive: true }
+            meta: { keepAlive: false }
         }
     ]
 }]

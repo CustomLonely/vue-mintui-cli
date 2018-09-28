@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="head">
-      <Header :mytitle="cityName" changecity="true" goback="true">
+      <Header :mytitle="cityName" :changecity="true" :goback="true">
       </Header>
     </div>
     <form v-on:submit.prevent>
@@ -11,9 +11,9 @@
         <div class="city-item"  @click="nextPage(index,item.geohash, item.name)"   v-for="(item,index) in cityList" 
         :key="index" >
            <mt-cell 
-      :title="item.address" 
-        :label="item.name" 
-    
+          :title="item.name" 
+            :label="item.address" 
+        
         >
         </mt-cell>
         
@@ -27,7 +27,7 @@
 <script>
 import { Header } from "@/components";
 import { searchCity } from "@/ports";
-import { setStore, getStore, removeStore } from "@/untils/untils";
+
 export default {
   data() {
     return {
@@ -37,36 +37,36 @@ export default {
       keyword: "", //搜索关键词
       isCity: false, // 搜索无结果，显示提示信息
       historyList: [], // 历史搜索记录
-      historytitle: true,// 默认显示搜索历史头部，点击搜索后隐藏,
-      isHistory:false
+      historytitle: true, // 默认显示搜索历史头部，点击搜索后隐藏,
+      isHistory: false
     };
   },
 
   created() {
-    this.cityId = this.$route.params.cityid;
-    this.cityName = this.$route.params.name;
+    this.cityId = Api.isRouteData("cityid", this.$route.params.cityid);
+    this.cityName = Api.isRouteData("cityname", this.$route.params.name);
+    console.log(this.$route.params);
     this.initData();
-    console.log(this.$route);
   },
   mounted() {},
   methods: {
     initData() {
-      if (getStore("placehistory")) {
-        this.cityList = JSON.parse(getStore("placehistory"));
-          this.isHistory = this.cityList.length>0 ? true : false;
+      if (Api.getStore("placehistory")) {
+        this.cityList = JSON.parse(Api.getStore("placehistory"));
+        this.isHistory = this.cityList.length > 0 ? true : false;
       } else {
         this.cityList = [];
-        this.isCity=false;
+        this.isCity = false;
       }
     },
 
-    async searchAddress() {
+    async searchAddress(cityid, keyword) {
       if (this.keyword && this.keyword.length > 0) {
-        let res = await searchCity(this.cityid, this.keyword);
+        let res = await searchCity(cityid, keyword);
         this.historytitle = false;
         this.cityList = res;
-        this.isHistory=false;
-        this.isCity=res.length>0?true:false;
+        this.isHistory = false;
+        this.isCity = res.length > 0 ? false : true;
       }
     },
 
@@ -75,8 +75,7 @@ export default {
      * 如果没有则新增，如果有则不做重复储存，判断完成后进入下一页
      */
     nextPage(index, geohash, address) {
-      console.log("触发");
-      let history = getStore("placehistory");
+      let history = Api.getStore("placehistory");
       let selecthistory = this.cityList[index];
       if (history) {
         let checkrepeat = false;
@@ -93,7 +92,7 @@ export default {
         this.isCity = true;
         this.historyList.push(selecthistory);
       }
-      setStore("placehistory", this.historyList);
+      Api.setStore("placehistory", this.historyList);
       this.$router.push({
         name: "food",
         params: {
@@ -104,7 +103,7 @@ export default {
     },
     //清除历史纪录
     clearAll() {
-      removeStore("placehistory");
+      Api.removeStore("placehistory");
       this.initData();
     }
   },

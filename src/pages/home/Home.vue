@@ -10,7 +10,7 @@
     </mt-cell>
     <mt-cell title="热门城市"></mt-cell>
     <ul class="hotcity">
-      <router-link :to="{name:'city',params:{cityid:addressId,name:address}}" tag="li" v-for="(item,index) in hotCity" :key="index" class="hotname">
+      <router-link :to="{name:'city',params:{cityid:item.id,name:item.name}}" tag="li" v-for="(item,index) in hotCity" :key="index" class="hotname">
         {{item.name}}
       </router-link>
     </ul>
@@ -19,7 +19,7 @@
       <mt-index-list>
         <mt-index-section v-for="(item,key) in sortCitys" :key="key" :index="key">
           <ul class="totalcity">
-            <router-link :to="{name:'city',params:{cityid:addressId,name:address}}" tag="li" v-for="(v,i) in item" :key="i">{{v.name}}</router-link>
+            <router-link :to="{name:'city',params:{cityid:v.id,name:v.name}}" tag="li" v-for="(v,i) in item" :key="i">{{v.name}}</router-link>
           </ul>
         </mt-index-section>
       </mt-index-list>

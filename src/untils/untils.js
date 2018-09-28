@@ -12,6 +12,7 @@ export const setStore = (name, content) => {
     window.localStorage.setItem(name, content);
 }
 
+
 /**
  * 获取localStorage
  */
@@ -33,6 +34,62 @@ export const removeStore = name => {
     }
     window.localStorage.removeItem(name);
 }
+
+/***
+ * 存储sessionStorage
+ */
+
+export const setData = (name, content) => {
+    if (!name) {
+        return;
+    }
+    if (typeof content !== 'string') {
+        content = JSON.stringify(content);
+    }
+    window.sessionStorage.setItem(name, content);
+}
+
+
+/**
+ * 获取sessionStorage
+ */
+
+export const getData = (name) => {
+    if (!name) {
+        return;
+    }
+    return window.sessionStorage.getItem(name);
+}
+
+/**
+ * 删除sessionStorage
+ */
+
+export const removeData = name => {
+    if (!name) {
+        return;
+    }
+    window.sessionStorage.removeItem(name);
+}
+
+/***
+ * 路由传参是否存在sessionStorage
+ * @param store 数据名称
+ * @param name  sessionid
+ */
+
+export const isRouteData = (name, routerparam) => {
+    if (!name) {
+        return;
+    }
+    if (routerparam && routerparam != "") {
+        setData(name, routerparam);
+    }
+    return getData(name);
+}
+
+
+
 
 /***
  * 获取style样式
