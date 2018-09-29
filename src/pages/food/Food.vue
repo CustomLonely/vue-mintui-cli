@@ -13,20 +13,12 @@
             :user="$store.state.isload==true">
             
             </Header>
-            <mt-swipe :auto="0" class="navbar">
-              <mt-swipe-item v-for="(item,index) in menulist" :key="index">
-                <ul class="foodmenu">
-                  <li v-for="(v,i) in item[0]" :key="i">
-                    <img :src="v.image_url|url">
-                    <span>{{v.title}}</span>
-                  </li>
-                </ul>
-              </mt-swipe-item>
-            </mt-swipe>
+            <Navbar></Navbar>
             <div class="nearBymerchants">
               <mt-cell title="附近商家">
                 <img slot="icon" src="../../assets/foodshop.svg" height="25" width="25" alt="">
               </mt-cell>
+              <Card></Card>
             </div>
           </div>
         </mt-tab-container-item>
@@ -51,19 +43,14 @@
   </div>
 </template>
 <script>
-import { Header } from "@/components";
-
-import { getFoodEntry, restaurants } from "@/ports";
+import { Header, Navbar, Card } from "@/components";
 
 export default {
   name: "page-tab-container",
   data() {
     return {
-      menulist: [], //菜单
-
-      geohash: "",
       search: true,
-      params: {},
+
       addressName: "",
       selected: "外卖",
       tabBarList: [
@@ -91,43 +78,16 @@ export default {
     };
   },
   created() {
-    this.geohash = Api.isRouteData("geohash", this.$route.params.geohash);
     this.addressName = Api.isRouteData("address", this.$route.params.address);
   },
-  beforeMount() {
-    let arr = this.geohash.split(",");
-    this.params.latitude = arr[0];
-    this.params.longitude = arr[1];
-    this.params.limit = 40;
-  },
-  mounted() {
-    this.getMenulist();
-    this.getNearbyShop(this.params);
-  },
+
   components: {
-    Header
+    Header,
+    Navbar,
+    Card
   },
-  methods: {
-    //navbar菜单
-    async getMenulist() {
-      let res = await getFoodEntry(this.geohash);
-      let newMenulist = [];
-      for (let i = 0; i < res.length; i += 8) {
-        let result = [];
-        result.push(res.slice(i, i + 8));
-        newMenulist.push(result);
-      }
-      this.menulist = newMenulist;
-    },
-    //商家列表
-    async getNearbyShop(params) {
-      let res = await restaurants(params);
-      console.log(res);
-    }
-  },
-  computed: {
-    sortMenulist() {}
-  }
+
+  computed: {}
 };
 </script>
 <style lang="less">

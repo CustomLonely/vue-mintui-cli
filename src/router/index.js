@@ -12,8 +12,7 @@ export default [{
     children: [
         {
             path: "",
-            component: home,
-            meta: { keepAlive: true },
+            redirect: '/home'
         },
 
         {

@@ -85,7 +85,6 @@ import {
 // Vue.prototype.$patch = patch;
 // Vue.prototype.$put = put;
 
-
 window.Api = {
   Config,
   post,

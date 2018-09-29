@@ -4,7 +4,7 @@ import Vue from 'vue'
 // 导入 vuex
 import Vuex from 'vuex'
 Vue.use(Vuex)
-import Config from '@/config/Config.js';
+
 const state = {
   latitude: '',// 纬度
   longitude: '',// 经度
