@@ -2,7 +2,7 @@
   <div class="login" >
      <Header :mytitle="content" goback="true" ref='header' @click="goPage"></Header>
     <mt-field label="用户名" placeholder="请输入用户名" v-model="username" disableClear></mt-field>
-    <mt-field label="密码" placeholder="请输入密码" type="password" v-model="password" disableClear>
+    <mt-field label="密码" :attr='{name:"password"}' placeholder="请输入密码" type="password" v-model="password" disableClear>
       <mt-switch v-model="showPassword" @change="toggleShow"></mt-switch>
     </mt-field>
     <mt-field label="验证码" class="security_code" disableClear v-model="securityCode">

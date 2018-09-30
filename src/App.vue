@@ -24,6 +24,7 @@ export default {
 </script>
 
  <style lang="less">
+@import "./assets/images/iconfont/icon.css";
 #app {
   position: absolute;
   left: 0;

@@ -3,7 +3,7 @@
         <section class="star_container">
             <i class="icon icon-ic_collectfull- grey_fill" v-for="num in 5" :key="num"></i>
         </section>
-        <div class="staractive" :style="'width:' + rating*2/5 + 'rem'">
+        <div class="star_overflow" :style="'width:' + (rating/5)*60 + 'px'">
             <section class="star_container">
                 <i class="icon icon-ic_collectfull- orange_fill" v-for="num in 5" :key="num"></i>
             </section>
@@ -20,7 +20,7 @@ export default {
 .rating_container {
   position: relative;
   top: 0.2rem;
-  .wh(2rem, 0.4rem);
+  .wh(60px, 18px);
   .star_overflow {
     overflow: hidden;
     position: relative;
@@ -29,15 +29,14 @@ export default {
   .star_container {
     position: absolute;
     display: flex;
-    width: 2rem;
-    height: 0.4rem;
-    top: -0.02rem;
-    left: -0.02rem;
+    width: 60px;
+    height: 18px;
+
     .grey_fill {
-      fill: #d1d1d1;
+      color: #d1d1d1;
     }
     .orange_fill {
-      fill: #ff9a0d;
+      color: #ff9a0d;
     }
   }
 }

@@ -5,9 +5,9 @@
                 <div class="imgbox">
                     <img :src="item.image_path | url(imgBaseUrl)" alt="" class="cardimg">
                 </div>
-                <div>
+                <div class="cardleftinfo">
                     <p>{{item.name}}</p>
-                    <p><Star :rating="item.rating"></Star></p>
+                    <p class="ratinginfo"><Star class="ct" :rating="item.rating"></Star><span>{{item.rating}}</span></p>
                     <p></p>
                 </div>
             </div>
@@ -59,11 +59,22 @@ export default {
   width: 100%;
   display: flex;
   justify-content: space-between;
-
   align-items: center;
   padding: 10px;
   .cardleft {
     display: flex;
+    .cardleftinfo {
+      margin-left: 10px;
+      .ratinginfo {
+        position: relative;
+        display: flex;
+        height: 30px;
+        line-height: 30px;
+        span {
+          margin-left: 10px;
+        }
+      }
+    }
     .cardimg {
       width: 63px;
       height: 63px;
