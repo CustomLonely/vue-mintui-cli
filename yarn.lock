@@ -4322,6 +4322,10 @@ performance-now@^2.1.0:
   version "2.1.0"
   resolved "http://registry.npm.taobao.org/performance-now/download/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
 
+photoswipe@^4.1.1:
+  version "4.1.2"
+  resolved "http://registry.npm.taobao.org/photoswipe/download/photoswipe-4.1.2.tgz#95c20a75cea23b70d6299641cad82e03cae7f797"
+
 pify@^2.0.0, pify@^2.3.0:
   version "2.3.0"
   resolved "http://registry.npm.taobao.org/pify/download/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
@@ -6121,6 +6125,12 @@ vue-template-compiler@^2.5.2:
 vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "http://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
+
+vue2-preview@^1.0.2:
+  version "1.0.2"
+  resolved "http://registry.npm.taobao.org/vue2-preview/download/vue2-preview-1.0.2.tgz#ad47e87dee358bf46f2a9c519048f9f6f714bc34"
+  dependencies:
+    photoswipe "^4.1.1"
 
 vue@^2.5.2:
   version "2.5.17"

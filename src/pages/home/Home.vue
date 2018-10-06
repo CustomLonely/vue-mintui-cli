@@ -81,7 +81,8 @@ export default {
       .then(res => {
         getWeather(res).then(res => {
           let wendu = res.data.data.wendu;
-          let today = moment().format("DD");
+          let today = moment().format("dddd");
+          console.log(today);
           let todayData = res.data.data.forecast.filter((item, index) => {
             return item.date.indexOf(today) != -1;
           });

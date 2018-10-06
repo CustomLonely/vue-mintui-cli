@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-tab-container">
-      <mt-tab-container class="page-tabbar-tab-container" v-model="selected">
+      <mt-tab-container class="page-tabbar-tab-container"  v-model="selected">
         <mt-tab-container-item id="外卖">
           <div class="foodinfo">
       
@@ -33,7 +33,7 @@
         </mt-tab-container-item>
       </mt-tab-container>
     </div>
-    <mt-tabbar v-model="selected">
+    <mt-tabbar v-model="selected" fixed>
       <mt-tab-item v-for="(item,index) in tabBarList" :key="index" :id="item.id">
         <img :src="selected==item.id?item.activeurl:item.url" alt="" width="20" height="20">
        <p> {{item.id}}</p>
@@ -50,7 +50,6 @@ export default {
   data() {
     return {
       search: true,
-
       addressName: "",
       selected: "外卖",
       tabBarList: [
@@ -97,6 +96,9 @@ export default {
   display: flex;
   flex-direction: column;
   background: extract(@whiteColor, 4);
+  .navbar {
+    margin-top: 45px;
+  }
   .navbar,
   .foodmenu {
     width: 100%;

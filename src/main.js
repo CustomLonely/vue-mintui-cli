@@ -1,11 +1,14 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import 'babel-polyfill'
 
 import Es6Promise from 'es6-promise'
-import 'lib-flexible/flexible.js'
 Es6Promise.polyfill()
+
+import 'lib-flexible/flexible.js'
+
+
 import moment from 'moment';
+import 'moment/locale/zh-cn' //moment设置中文
+
 import Vue from 'vue'
 
 // 导入 vuex
@@ -16,9 +19,15 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 import routes from '@/router'
 const router = new VueRouter({
+
   routes,
 
 })
+
+// 导入 图片预览插件
+
+import VuePreview from 'vue2-preview'
+Vue.use(VuePreview)
 
 import Config from '@/config/Config.js'
 

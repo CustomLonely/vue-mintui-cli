@@ -19,7 +19,7 @@ export default {
 @import "../../style/basic";
 .rating_container {
   position: relative;
-  top: 0.2rem;
+
   .wh(60px, 18px);
   .star_overflow {
     overflow: hidden;

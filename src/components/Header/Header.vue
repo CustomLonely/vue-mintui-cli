@@ -1,6 +1,6 @@
 <template>
  <div class="header">
-    <mt-header :title="mytitle">
+    <mt-header  :title="mytitle">
     <mt-button  slot="left" v-if="logo">ele.me</mt-button>    
     <mt-button  @click="goPage" icon="back" slot="left" v-if="goback"></mt-button>
     <mt-button slot="right"  v-if="changecity" @click="$router.push('/home')">切换城市</mt-button>
@@ -35,6 +35,11 @@ export default {
 @import "../../style/basic.less";
 .header {
   min-height: 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 
   .mint-header {
     background-color: extract(@blueColor, 8);

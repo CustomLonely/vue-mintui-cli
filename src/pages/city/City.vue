@@ -1,10 +1,8 @@
 <template>
   <div class="container">
-    <div class="head">
       <Header :mytitle="cityName" :changecity="true" :goback="true">
       </Header>
-    </div>
-    <form v-on:submit.prevent>
+    <form v-on:submit.prevent class="searchaddress">
       <mt-search v-model="keyword" :show='true' placeholder="输入学校、商务楼、地址" @keyup.enter="searchAddress">
         <mt-button class="submitbtn" @click="searchAddress(cityId,keyword)" type="primary">提交</mt-button>
         <mt-cell v-if="historytitle" title="搜索历史"></mt-cell>
@@ -114,59 +112,62 @@ export default {
 </script>
 <style lang="less">
 @import "../../style/basic.less";
-.mint-search {
-  background-color: extract(@whiteColor, 1);
-  .mint-searchbar {
+.searchaddress {
+  margin-top: 45px;
+  .mint-search {
     background-color: extract(@whiteColor, 1);
-    .mint-searchbar-inner {
-      border: 1px solid extract(@blackColor, 4);
-      height: 30px;
+    .mint-searchbar {
+      background-color: extract(@whiteColor, 1);
+      .mint-searchbar-inner {
+        border: 1px solid extract(@blackColor, 4);
+        height: 30px;
+        line-height: 30px;
+      }
+      input[type="search"] {
+        text-indent: 10px;
+      }
+    }
+    .mint-search-list {
+      margin-top: 50px;
+      overflow: hidden;
+      overflow-y: auto;
+      height: 100%;
+    }
+    .submitbtn {
+      height: 40px;
+      line-height: 40px;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+    }
+  }
+  .city-item {
+    padding: 10px 0;
+
+    .mint-cell-text {
+      font-size: 17px;
       line-height: 30px;
+      color: #333;
     }
-    input[type="search"] {
-      text-indent: 10px;
+    .mint-cell-label {
+      font-size: 15px;
+      line-height: 26px;
+      color: #999;
+    }
+    .mint-cell-wrapper {
+      border-bottom: 1px solid #e4e4e4;
     }
   }
-  .mint-search-list {
-    margin-top: 50px;
-    overflow: hidden;
-    overflow-y: auto;
-    height: 100%;
-  }
-  .submitbtn {
-    height: 40px;
-    line-height: 40px;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-  }
-}
-.city-item {
-  padding: 10px 0;
 
-  .mint-cell-text {
-    font-size: 17px;
-    line-height: 30px;
-    color: #333;
+  .search_none_place {
+    margin: 0 auto;
+    width: 100%;
+    line-height: 28px;
+    text-align: center;
+    font-size: 16px;
+    color: extract(@blueColor, 1);
   }
-  .mint-cell-label {
-    font-size: 15px;
-    line-height: 26px;
-    color: #999;
-  }
-  .mint-cell-wrapper {
-    border-bottom: 1px solid #e4e4e4;
-  }
-}
-
-.search_none_place {
-  margin: 0 auto;
-  width: 100%;
-  line-height: 28px;
-  text-align: center;
-  font-size: 16px;
-  color: extract(@blueColor, 1);
 }
 </style>
 

@@ -20,7 +20,8 @@ module.exports = {
     filename: '[name].js',
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+      : config.dev.assetsPublicPath,
+
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -36,6 +37,11 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /vue-preview.src.*?js$/,
+        loader: 'babel'
+
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
