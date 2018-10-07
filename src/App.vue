@@ -4,12 +4,12 @@
 	<transition name="router-fade" mode="out-in">
 			<keep-alive>
 			    <router-view v-if="$route.meta.keepAlive"></router-view>
-            <lg-preview></lg-preview>
+           
 			</keep-alive>
     	</transition>
       <transition name="router-fade" mode="out-in">
 			<router-view v-if="!$route.meta.keepAlive"></router-view>
-        <lg-preview></lg-preview>
+       
 		</transition>
   </div>
 </template>

@@ -82,14 +82,20 @@ export default {
         getWeather(res).then(res => {
           let wendu = res.data.data.wendu;
           let today = moment().format("dddd");
-          console.log(today);
+          if (today == "星期日") {
+            today = "星期天";
+          }
+
+          console.log(today, res.data.data);
           let todayData = res.data.data.forecast.filter((item, index) => {
             return item.date.indexOf(today) != -1;
           });
 
           this.weather = wendu;
           console.log(todayData);
-          this.tianqi = todayData[0].type;
+          if (todayData.length > 0) {
+            this.tianqi = todayData[0].type;
+          }
         });
       });
     //热门城市
@@ -130,6 +136,7 @@ export default {
 @import "../../assets/images/iconfont/icon.css";
 .addressinfo {
   background-color: extract(@blueColor, 8);
+  margin-top: 40px;
   .mint-cell-title {
     white-space: nowrap;
     overflow: hidden;

@@ -3,9 +3,8 @@
               <mt-swipe-item v-for="(item,index) in menulist" :key="index">
                 <ul class="foodmenu">
                   <li v-for="(v,i) in item" :key="i">
-                     <img @click="$preview.open(index, menulist)" 
-                     :src="v.image_url|url" 
-                      class="preview-img">
+                     <img :src="v.image_url|url" 
+                    >
                    
                     <span>{{v.title}}</span>
                   </li>
@@ -37,13 +36,6 @@ export default {
         newMenulist.push(res.slice(i, i + 8));
       }
       this.menulist = newMenulist;
-      this.menulist.forEach((item, index) => {
-        item.forEach((v, i) => {
-          v.w = 600;
-          v.h = 400;
-          v.src = Api.Config.navimgUrl + v.image_url;
-        });
-      });
 
       console.log(this.menulist);
     }
