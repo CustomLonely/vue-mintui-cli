@@ -46,7 +46,9 @@ export default {
     console.log(this.$route.params);
     this.initData();
   },
+
   mounted() {},
+
   methods: {
     initData() {
       if (Api.getStore("placehistory")) {
@@ -105,6 +107,7 @@ export default {
       this.initData();
     }
   },
+
   components: {
     Header
   }

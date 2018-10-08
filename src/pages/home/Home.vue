@@ -2,7 +2,7 @@
   <div class="homeinfo">
     <Header logo="true" :login="$store.state.isload==false" :user="$store.state.isload==true"></Header>
     <mt-cell :title="addressInfo" class="addressinfo">
-      <span>{{weather}}℃ {{tianqi}}</span>
+      <span>{{weather}}℃ <Weather :qihou='tianqi'></Weather></span>
       <span slot="icon"> <i class="icon icon-ziyuandoctor_icon5"></i></span>
     </mt-cell>
     <mt-cell class="positoncity" title="当前定位城市" value="定位不准时，请在城市列表中选择"></mt-cell>
@@ -27,7 +27,7 @@
   </div>
 </template>
 <script>
-import { Header } from "@/components";
+import { Header, Weather } from "@/components";
 import moment from "moment";
 import {
   getDefaultCity,
@@ -36,6 +36,7 @@ import {
   getHotCity,
   getTotalCity
 } from "@/ports";
+
 export default {
   data() {
     return {
@@ -49,6 +50,7 @@ export default {
       tianqi: ""
     };
   },
+
   watch: {
     totalCityHeight() {
       const height = document
@@ -57,8 +59,8 @@ export default {
       this.fixBottom = this.sortCitys.length > 0 ? height + 30 : height;
     }
   },
+
   mounted() {
-    console.log(this.fixBottom);
     //定位城市
     getDefaultCity
       .then(
@@ -86,16 +88,16 @@ export default {
             today = "星期天";
           }
 
-          console.log(today, res.data.data);
           let todayData = res.data.data.forecast.filter((item, index) => {
             return item.date.indexOf(today) != -1;
           });
 
           this.weather = wendu;
-          console.log(todayData);
+
           if (todayData.length > 0) {
             this.tianqi = todayData[0].type;
           }
+          console.log(this.tianqi);
         });
       });
     //热门城市
@@ -112,6 +114,7 @@ export default {
       this.totalCity = res;
     });
   },
+
   computed: {
     sortCitys() {
       let sortObj = {};
@@ -127,7 +130,8 @@ export default {
   },
 
   components: {
-    Header
+    Header,
+    Weather
   }
 };
 </script>
@@ -136,7 +140,7 @@ export default {
 @import "../../assets/images/iconfont/icon.css";
 .addressinfo {
   background-color: extract(@blueColor, 8);
-  margin-top: 40px;
+  margin-top: 38px;
   .mint-cell-title {
     white-space: nowrap;
     overflow: hidden;
