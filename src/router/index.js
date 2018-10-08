@@ -30,7 +30,9 @@ export default [{
         },
         {
             path: '/login',
-            component: login
+            component: login,
+            name: 'login',
+            meta: { keepAlive: false },
         },
         {
             path: '/food',

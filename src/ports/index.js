@@ -320,11 +320,23 @@ export const getAddress = user_id => get(`v1/users/${user_id}/addresses`)
 
 
 /**
+ * 检测帐号是否存在
+ * @param {string}   checkNumber             帐户
+ * @param {string}   type                    类型
+ */
+
+export const checkExsis = (checkNumber, type) => get('/v1/users/exists', {
+    type,
+    [type]: checkNumber
+});
+
+
+/**
  * 获取验证码 
  * 
  */
 
-export const postCaptchas = post('v1/captchas');
+export let postCaptchas = post('v1/captchas');
 
 /***
  * 获取用户信息

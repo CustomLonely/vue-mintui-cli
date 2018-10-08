@@ -178,11 +178,15 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        font-size: 12px;
+        font-family: "行书";
         .rightinfo {
           .distance,
-          .segmentation,
-          .order_time {
+          .segmentation {
             color: extract(@blackColor, 5);
+          }
+          .order_time {
+            color: extract(@blueColor, 3);
           }
         }
       }

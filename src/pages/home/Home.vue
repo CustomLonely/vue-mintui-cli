@@ -2,7 +2,7 @@
   <div class="homeinfo">
     <Header logo="true" :login="$store.state.isload==false" :user="$store.state.isload==true"></Header>
     <mt-cell :title="addressInfo" class="addressinfo">
-      <span>{{weather}}℃ <Weather :qihou='tianqi'></Weather></span>
+      <span class="weatherwrapper">{{weather}}℃ <Weather :qihou='tianqi'></Weather></span>
       <span slot="icon"> <i class="icon icon-ziyuandoctor_icon5"></i></span>
     </mt-cell>
     <mt-cell class="positoncity" title="当前定位城市" value="定位不准时，请在城市列表中选择"></mt-cell>
@@ -153,7 +153,7 @@ export default {
   }
   .mint-cell-value {
     span {
-      color: #fff;
+      color: extract(@whiteColor, 1);
       font-size: 18px;
     }
   }
@@ -215,6 +215,7 @@ export default {
       height: 100%;
       overflow-y: auto;
       .mint-indexlist-content {
+        height: 27.9em !important;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         overflow-scrolling: touch;
