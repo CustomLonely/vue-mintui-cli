@@ -33,7 +33,7 @@ if (process.env.NODE_ENV == 'development') {
   apiUrl['baseUrl'] = '//elm.cangdu.org:8001';
   apiUrl['imgBaseUrl'] = '//elm.cangdu.org/img/';
 }
-console.log(process.env.NODE_ENV)
+
 const Config = {
   bundleVersion,
 

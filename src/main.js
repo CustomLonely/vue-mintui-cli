@@ -19,7 +19,8 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 import routes from '@/router'
 const router = new VueRouter({
-
+  //去掉地址中的哈希#
+  mode: "history",
   routes,
 
 })
@@ -28,6 +29,20 @@ const router = new VueRouter({
 
 import VuePreview from 'vue2-preview'
 Vue.use(VuePreview)
+
+//引入地图组件vue-amap
+import AMap from 'vue-amap';
+Vue.use(AMap);
+
+// 初始化vue-amap
+AMap.initAMapApiLoader({
+  // 申请的高德key
+  key: 'ef0b8233ad8cd27f6e7aa182f8bffefa',
+  // 插件集合
+  plugin: ['AMap.PlaceSearch', 'AMap.Geolocation'],
+  uiVersion: '1.0.11' // 版本号
+});
+
 
 import Config from '@/config/Config.js'
 

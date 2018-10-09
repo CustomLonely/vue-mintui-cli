@@ -1,6 +1,6 @@
 <template>
   <div class="homeinfo">
-    <Header logo="true" :login="$store.state.isload==false" :user="$store.state.isload==true"></Header>
+    <Header logo="true" :islogin="$store.getters.login"></Header>
     <mt-cell :title="addressInfo" class="addressinfo">
       <span class="weatherwrapper">{{weather}}℃ <Weather :qihou='tianqi'></Weather></span>
       <span slot="icon"> <i class="icon icon-ziyuandoctor_icon5"></i></span>
@@ -37,6 +37,8 @@ import {
   getTotalCity
 } from "@/ports";
 
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
@@ -61,6 +63,7 @@ export default {
   },
 
   mounted() {
+    this.getDeafult();
     //定位城市
     getDefaultCity
       .then(
@@ -109,6 +112,7 @@ export default {
         console.log(err);
       }
     );
+
     //全部城市
     getTotalCity.then(res => {
       this.totalCity = res;
@@ -128,7 +132,13 @@ export default {
       return sortObj;
     }
   },
-
+  methods: {
+    //定位
+    getDeafult() {
+      let position = new AMap.Geolocation({});
+      console.log(position);
+    }
+  },
   components: {
     Header,
     Weather

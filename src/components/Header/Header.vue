@@ -4,9 +4,9 @@
     <mt-button  slot="left" v-if="logo">ele.me</mt-button>    
     <mt-button  @click="goPage" icon="back" slot="left" v-if="goback"></mt-button>
     <mt-button slot="right"  v-if="changecity" @click="$router.push('/home')">切换城市</mt-button>
-    <mt-button  slot="left" v-show="search" @click="$router.push('/search')"><i class="icon icon-magnifier"></i></mt-button>   
-    <mt-button  slot="right"  v-if="login" @click="$router.push('/login')">登陆|注册</mt-button>
-    <mt-button  slot="right"  v-if="user">
+    <mt-button  slot="left" v-show="search" @click="toPage"><i class="icon icon-magnifier"></i></mt-button>   
+    <mt-button  slot="right"  v-if="islogin==false" @click="$router.push('/login')">登陆|注册</mt-button>
+    <mt-button  slot="right"  v-if="islogin==true">
       <i class="icon icon-tab_icon3"></i>
     </mt-button>
   
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  props: ["mytitle", "goback", "changecity", "logo", "login", "search", "user"],
+  props: ["mytitle", "goback", "changecity", "logo", "islogin", "search"],
   data() {
     return {};
   },
@@ -25,6 +25,10 @@ export default {
   methods: {
     goPage() {
       this.$router.go(-1);
+    },
+
+    toPage() {
+      this.$emit("tosearch");
     }
   }
 };

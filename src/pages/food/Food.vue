@@ -2,17 +2,18 @@
   <div>
     <div class="page-tab-container">
       <mt-tab-container class="page-tabbar-tab-container"  v-model="selected">
+       
         <mt-tab-container-item id="外卖">
           <div class="foodinfo">
-      
-            <Header 
+                 <Header 
             :mytitle="addressName" 
-            :search="$store.state.search==true"
-           
-            :login="$store.state.isload==false" 
-            :user="$store.state.isload==true">
+            :search="search"
+            :islogin="$store.getters.login"
+            @tosearch='toSearch'
+            >
             
             </Header>
+     
             <Navbar></Navbar>
             <div class="nearBymerchants">
               <mt-cell title="附近商家">
@@ -26,7 +27,8 @@
           订单
         </mt-tab-container-item>
         <mt-tab-container-item id="发现">
-          发现
+        
+          <Search></Search>
         </mt-tab-container-item>
         <mt-tab-container-item id="我的">
           我的
@@ -45,6 +47,7 @@
 <script>
 import { Header, Navbar, Card } from "@/components";
 
+import Search from "@/pages/search/Search.vue";
 export default {
   name: "page-tab-container",
   data() {
@@ -80,10 +83,24 @@ export default {
     this.addressName = Api.isRouteData("address", this.$route.params.address);
   },
 
+  watch: {
+    selected(val, oldval) {
+      console.log(val);
+    }
+  },
+
+  methods: {
+    //切换搜索页
+    toSearch() {
+      this.selected = "发现";
+    }
+  },
+
   components: {
     Header,
     Navbar,
-    Card
+    Card,
+    Search
   },
 
   computed: {}

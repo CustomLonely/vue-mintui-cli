@@ -11,8 +11,7 @@
            <mt-cell 
           :title="item.name" 
             :label="item.address" 
-        
-        >
+            >
         </mt-cell>
         
         </div>

@@ -8,6 +8,8 @@ const food = () => import('@/pages/food/Food.vue') //店家主页
 
 const search = () => import('@/pages/search/Search.vue') //搜索美食 店家
 
+const shopinfo = () => import('@/pages/shopinfo/ShopInfo.vue') //商家详情
+
 export default [{
     path: '/',
     component: App,
@@ -38,11 +40,16 @@ export default [{
             path: '/food',
             name: 'food',
             component: food,
-            meta: { keepAlive: false }
+            meta: { keepAlive: false },
         },
         {
             path: '/search',
             component: search
+        },
+        {
+            path: '/shopinfo',
+            name: 'shopinfo',
+            component: shopinfo
         }
     ]
 }]

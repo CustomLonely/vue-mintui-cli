@@ -75,7 +75,7 @@ export default {
      * 如果没有则新增，如果有则不做重复储存，判断完成后进入下一页
      */
     nextPage(index, geohash, address) {
-      let history = Api.getStore("placehistory");
+      let history = Api.getStore("searchShop");
       let selecthistory = this.cityList[index];
       if (history) {
         let checkrepeat = false;
@@ -92,9 +92,9 @@ export default {
         this.isCity = true;
         this.historyList.push(selecthistory);
       }
-      Api.setStore("placehistory", this.historyList);
+      Api.setStore("searchShop", this.historyList);
       this.$router.push({
-        name: "food",
+        name: "shopinfo",
         params: {
           geohash,
           address
