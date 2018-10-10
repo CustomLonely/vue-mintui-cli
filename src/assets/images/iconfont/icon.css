@@ -1,0 +1,565 @@
+/**
+ * @file icon.css
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none
+}
+
+blockquote, body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, hr, input, legend, li, ol, p, pre, td, textarea, th, ul {
+  margin: 0;
+  padding: 0
+}
+
+body, button, input, select, textarea {
+  font: 12px/1.5 tahoma, arial, sans-serif
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%
+}
+
+address, cite, dfn, em, var {
+  font-style: normal
+}
+
+code, kbd, pre, samp {
+  font-family: courier new, courier, monospace
+}
+
+small {
+  font-size: 12px
+}
+
+ol, ul {
+  list-style: none
+}
+
+a {
+  text-decoration: none
+}
+
+a:hover {
+  text-decoration: underline
+}
+
+legend {
+  color: #000
+}
+
+fieldset, img {
+  border: 0
+}
+
+button, input, select, textarea {
+  font-size: 100%
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0
+}
+
+.main {
+  padding: 30px 100px
+}
+
+.main h1 {
+  font-size: 36px;
+  color: #333;
+  text-align: left;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee
+}
+
+.helps {
+  margin-top: 40px
+}
+
+.helps pre {
+  padding: 20px;
+  margin: 10px 0;
+  border: solid 1px #e7e1cd;
+  background-color: #fffdef;
+  overflow: auto
+}
+
+.iconfont-list {
+  overflow: hidden
+}
+
+.iconfont-list li {
+  float: left;
+  width: 100px;
+  height: 150px;
+  text-align: center
+}
+
+.iconfont-list .icon {
+  font-size: 42px;
+  line-height: 100px;
+  margin: 10px 0;
+  color: #333;
+  font-style: normal;
+  -webkit-transition: font-size .25s ease-out 0s;
+  -moz-transition: font-size .25s ease-out 0s;
+  transition: font-size .25s ease-out 0s
+}
+
+.iconfont-list .icon:hover {
+  font-size: 100px
+}
+
+.iconfont-list .code {
+  color: green;
+  font-weight: bold
+}
+
+@font-face {
+  font-family: "iconfont";
+  src: url("iconfont.eot");
+  /* IE9 */
+  src: url("iconfont.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("iconfont.woff") format("woff"), /* chrome、firefox */
+  url("iconfont.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */
+  url("iconfont.svg#uxfonteditor") format("svg");
+  /* iOS 4.1- */
+}
+
+.icon {
+  font-family: "iconfont" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-yintian:before {
+  content: "\e624";
+}
+
+.icon-wode:before {
+  content: "\e629";
+}
+
+.icon-icon-test1:before {
+  content: "\e604";
+}
+
+.icon-sousuo-tianchong:before {
+  content: "\e620";
+}
+
+.icon-leidian:before {
+  content: "\e61e";
+}
+
+.icon-xiaoyu:before {
+  content: "\e622";
+}
+
+.icon-xue:before {
+  content: "\e623";
+}
+
+.icon-dingdan:before {
+  content: "\e60a";
+}
+
+.icon-changyonglogo40:before {
+  content: "\e722";
+}
+
+.icon-e:before {
+  content: "\e795";
+}
+
+.icon-tianqi-baoxue:before {
+  content: "\e674";
+}
+
+.icon-tianqi-zhongyu:before {
+  content: "\e685,\e692";
+}
+
+.icon-tianqi-baoyu:before {
+  content: "\e686";
+}
+
+.icon-tianqi-daxue:before {
+  content: "\e687";
+}
+
+.icon-tianqi-wu:before {
+  content: "\e68c";
+}
+
+.icon-tianqi-daxue1:before {
+  content: "\e609";
+}
+
+.icon-tianqi-qing:before {
+  content: "\e614";
+}
+
+.icon-x:before {
+  content: "\78";
+}
+
+.icon-hzl-:before {
+  content: "\e658";
+}
+
+.icon-grzxfill-:before {
+  content: "\e659";
+}
+
+.icon-hzlfill-:before {
+  content: "\e65a";
+}
+
+.icon-grzx-:before {
+  content: "\e65b";
+}
+
+.icon-zxfill-:before {
+  content: "\e65c";
+}
+
+.icon-zx-:before {
+  content: "\e65d";
+}
+
+.icon-zjtfill-:before {
+  content: "\e65e";
+}
+
+.icon-zjt-:before {
+  content: "\e65f";
+}
+
+.icon-ic_order-:before {
+  content: "\e660";
+}
+
+.icon-ic_depart-:before {
+  content: "\e661";
+}
+
+.icon-ic_message-:before {
+  content: "\e662";
+}
+
+.icon-ic_addhz-:before {
+  content: "\e663";
+}
+
+.icon-ic_newhz-:before {
+  content: "\e664";
+}
+
+.icon-ic_woman-:before {
+  content: "\e665";
+}
+
+.icon-ic_locked-:before {
+  content: "\e666";
+}
+
+.icon-ic_choose-:before {
+  content: "\e667";
+}
+
+.icon-ic_man-:before {
+  content: "\e668";
+}
+
+.icon-ic_personx-:before {
+  content: "\e669";
+}
+
+.icon-ic_more-:before {
+  content: "\e66a";
+}
+
+.icon-ic_photo-:before {
+  content: "\e66b";
+}
+
+.icon-ic_camrea-:before {
+  content: "\e66c";
+}
+
+.icon-ic_voice-:before {
+  content: "\e66d";
+}
+
+.icon-ic_emjo-:before {
+  content: "\e66e";
+}
+
+.icon-ic_addtj-:before {
+  content: "\e66f";
+}
+
+.icon-ic_liaotianjiemiantianjiatupian-:before {
+  content: "\e670";
+}
+
+.icon-ic_arrowleft--:before {
+  content: "\e671";
+}
+
+.icon-ic_phoneadd-:before {
+  content: "\e672";
+}
+
+.icon-ic_code-:before {
+  content: "\e673";
+}
+
+.icon-ic_arrowright-:before {
+  content: "\e675";
+}
+
+.icon-ic_search-:before {
+  content: "\e677";
+}
+
+.icon-ic_close-:before {
+  content: "\e679";
+}
+
+.icon-ic_chooseriqi-:before {
+  content: "\e67d";
+}
+
+.icon-ic_pingbixf-:before {
+  content: "\e67e";
+}
+
+.icon-ic_pingbijz--:before {
+  content: "\e67f";
+}
+
+.icon-ic_unchoose-:before {
+  content: "\e680";
+}
+
+.icon-ic_xieyixuanzegougou-:before {
+  content: "\e681";
+}
+
+.icon-ic_xieyixuanze-:before {
+  content: "\e682";
+}
+
+.icon-ic_address-:before {
+  content: "\e683";
+}
+
+.icon-ic_nosee-:before {
+  content: "\e684";
+}
+
+.icon-ic_weirenz-:before {
+  content: "\e688";
+}
+
+.icon-ic_discussion-:before {
+  content: "\e689";
+}
+
+.icon-ic_discuss-:before {
+  content: "\e68a";
+}
+
+.icon-ic_lovewhite-:before {
+  content: "\e68b";
+}
+
+.icon-ic_wallet-:before {
+  content: "\e68d";
+}
+
+.icon-ic_set-:before {
+  content: "\e68e";
+}
+
+.icon-ic_xiaosanj-:before {
+  content: "\e68f";
+}
+
+.icon-ic_rili-:before {
+  content: "\e690";
+}
+
+.icon-ic_clockoi-:before {
+  content: "\e691";
+}
+
+.icon-ic_tancenggou:before {
+  content: "\e676";
+}
+
+.icon-ic_collectfullgg-:before {
+  content: "\e678";
+}
+
+.icon-ic_collectfull-:before {
+  content: "\e67a";
+}
+
+.icon-ic_zjtzx--:before {
+  content: "\e67b";
+}
+
+.icon-ic_chulizhong-:before {
+  content: "\e67c";
+}
+
+.icon-ic_yituikuan-:before {
+  content: "\e693";
+}
+
+.icon-ic_wenhao-:before {
+  content: "\e694";
+}
+
+.icon-ic_tijiaoshenhez-:before {
+  content: "\e695";
+}
+
+.icon-ic_finished-:before {
+  content: "\e696";
+}
+
+.icon-ic_walletqianb-:before {
+  content: "\e697";
+}
+
+.icon-ic_tishigantanh-:before {
+  content: "\e698";
+}
+
+.icon-ic_tishiyu-:before {
+  content: "\e699";
+}
+
+.icon-collection:before {
+  content: "\e802";
+}
+
+.icon-tab_icon:before {
+  content: "\e803";
+}
+
+.icon-heart:before {
+  content: "\e813";
+}
+
+.icon-heart-empty:before {
+  content: "\e814";
+}
+
+.icon-tab_icon_sel1:before {
+  content: "\e81b";
+}
+
+.icon-tab_icon_sel2:before {
+  content: "\e81c";
+}
+
+.icon-tab_icon2:before {
+  content: "\e81f";
+}
+
+.icon-tab_icon3:before {
+  content: "\e820";
+}
+
+.icon-famale:before {
+  content: "\e823";
+}
+
+.icon-male:before {
+  content: "\e824";
+}
+
+.icon-star:before {
+  content: "\e825";
+}
+
+.icon-tab_icon_sel3:before {
+  content: "\e826";
+}
+
+.icon-point:before {
+  content: "\e828";
+}
+
+.icon-ziyuanzan_icon:before {
+  content: "\e82a";
+}
+
+.icon-magnifier:before {
+  content: "\e835";
+}
+
+.icon-edit:before {
+  content: "\e836";
+}
+
+.icon-check:before {
+  content: "\e837";
+}
+
+.icon-delete02:before {
+  content: "\e838";
+}
+
+.icon-check02:before {
+  content: "\e83a";
+}
+
+.icon-delete:before {
+  content: "\e83b";
+}
+
+.icon-close:before {
+  content: "\e83c";
+}
+
+.icon-add-img:before {
+  content: "\e83d";
+}
+
+.icon-ziyuandoctor_icon5:before {
+  content: "\e83e";
+}
+
+.icon-ok:before {
+  content: "\e841";
+}
+
+.icon-pen:before {
+  content: "\e84c";
+}
+
+.icon-consulting:before {
+  content: "\e84f";
+}
+
+.icon-uniE202:before {
+  content: "\e202";
+}
+
+.icon-uniE232:before {
+  content: "\e232";
+}
