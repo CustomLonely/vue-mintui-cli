@@ -63,7 +63,6 @@ export default {
   },
 
   mounted() {
-    this.getDeafult();
     //定位城市
     getDefaultCity
       .then(
@@ -132,13 +131,7 @@ export default {
       return sortObj;
     }
   },
-  methods: {
-    //定位
-    getDeafult() {
-      let position = new AMap.Geolocation({});
-      console.log(position);
-    }
-  },
+
   components: {
     Header,
     Weather

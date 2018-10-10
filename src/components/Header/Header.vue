@@ -6,7 +6,7 @@
     <mt-button slot="right"  v-if="changecity" @click="$router.push('/home')">切换城市</mt-button>
     <mt-button  slot="left" v-show="search" @click="toPage"><i class="icon icon-magnifier"></i></mt-button>   
     <mt-button  slot="right"  v-if="islogin==false" @click="$router.push('/login')">登陆|注册</mt-button>
-    <mt-button  slot="right"  v-if="islogin==true">
+    <mt-button  slot="right"  v-if="islogin==true" @click="toMy">
       <i class="icon icon-tab_icon3"></i>
     </mt-button>
   
@@ -29,6 +29,9 @@ export default {
 
     toPage() {
       this.$emit("tosearch");
+    },
+    toMy() {
+      this.$emit("touser");
     }
   }
 };

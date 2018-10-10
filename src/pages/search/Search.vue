@@ -4,7 +4,7 @@
       </Header>
     <form v-on:submit.prevent class="searchaddress">
       <mt-search v-model="keyword" :show='true' placeholder="请输入商家或美食名称" @keyup.enter="searchAddress">
-        <mt-button class="submitbtn" @click="searchAddress(cityId,keyword)" type="primary">提交</mt-button>
+        <mt-button class="submitbtn" @click="searchShopList(geohash,keyword)" type="primary">提交</mt-button>
         <mt-cell v-if="historytitle" title="搜索历史"></mt-cell>
         <div class="city-item"  @click="nextPage(index,item.geohash, item.name)"   v-for="(item,index) in cityList" 
         :key="index" >
@@ -25,13 +25,11 @@
 
 <script>
 import { Header } from "@/components";
-import { searchCity } from "@/ports";
-
+import { searchCity, searchDiner } from "@/ports";
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      cityId: "",
-      cityName: "",
       cityList: [],
       keyword: "", //搜索关键词
       isCity: false, // 搜索无结果，显示提示信息
@@ -42,17 +40,18 @@ export default {
   },
 
   created() {
-    this.cityId = Api.isRouteData("cityid", this.$route.params.cityid);
-    this.cityName = Api.isRouteData("cityname", this.$route.params.name);
     console.log(this.$route.params);
     this.initData();
+  },
+  computed: {
+    ...mapGetters(["geohash"])
   },
   mounted() {},
 
   methods: {
     initData() {
-      if (Api.getStore("placehistory")) {
-        this.cityList = JSON.parse(Api.getStore("placehistory"));
+      if (Api.getStore("shoplist")) {
+        this.cityList = JSON.parse(Api.getStore("shoplist"));
         this.isHistory = this.cityList.length > 0 ? true : false;
       } else {
         this.cityList = [];
@@ -60,9 +59,10 @@ export default {
       }
     },
 
-    async searchAddress(cityid, keyword) {
+    async searchShopList(geohash, keyword) {
       if (this.keyword && this.keyword.length > 0) {
-        let res = await searchCity(cityid, keyword);
+        let res = await searchDiner(geohash, keyword);
+        console.log(res);
         this.historytitle = false;
         this.cityList = res;
         this.isHistory = false;
@@ -75,7 +75,7 @@ export default {
      * 如果没有则新增，如果有则不做重复储存，判断完成后进入下一页
      */
     nextPage(index, geohash, address) {
-      let history = Api.getStore("searchShop");
+      let history = Api.getStore("shoplist");
       let selecthistory = this.cityList[index];
       if (history) {
         let checkrepeat = false;
@@ -92,7 +92,7 @@ export default {
         this.isCity = true;
         this.historyList.push(selecthistory);
       }
-      Api.setStore("searchShop", this.historyList);
+      Api.setStore("shoplist", this.historyList);
       this.$router.push({
         name: "shopinfo",
         params: {
@@ -103,7 +103,7 @@ export default {
     },
     //清除历史纪录
     clearAll() {
-      Api.removeStore("placehistory");
+      Api.removeStore("shoplist");
       this.initData();
     }
   },

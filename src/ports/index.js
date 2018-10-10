@@ -107,7 +107,8 @@ export const restaurants =
 
 export const searchDiner = (geohash, keyword) => get('v4/restaurants', {
     geohash,
-    keyword
+    keyword,
+
 })
 
 /***

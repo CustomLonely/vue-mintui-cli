@@ -10,6 +10,7 @@
         <i class="icon icon-icon-test1" v-if="qihou=='多云'"></i>
         <i class="icon icon-leidian" v-if="qihou=='打雷'"></i>
         <i class="icon icon-xue" v-if="qihou=='雪'"></i>
+        <i class="icon icon-yintian" v-if="qihou=='阴'"></i>
     </span>
 </template>
 <script>

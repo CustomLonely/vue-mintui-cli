@@ -10,6 +10,7 @@
             :search="search"
             :islogin="$store.getters.login"
             @tosearch='toSearch'
+            @touser='toUser'
             >
             
             </Header>
@@ -19,7 +20,7 @@
               <mt-cell title="附近商家">
                 <img slot="icon" src="../../assets/foodshop.svg" height="25" width="25" alt="">
               </mt-cell>
-              <Card></Card>
+              <Card v-if="hasGetData"></Card>
             </div>
           </div>
         </mt-tab-container-item>
@@ -46,7 +47,8 @@
 </template>
 <script>
 import { Header, Navbar, Card } from "@/components";
-
+import { mapMutations } from "vuex";
+import { getAddressBygeohash, getDefaultCity } from "@/ports";
 import Search from "@/pages/search/Search.vue";
 export default {
   name: "page-tab-container",
@@ -76,24 +78,42 @@ export default {
           url: require("../../assets/images/tabbar/user.png"),
           activeurl: require("../../assets/images/tabbar/user_active.png")
         }
-      ]
+      ],
+      geohash: null,
+      hasGetData: false //是否已经获取地理位置数据，成功之后再获取商铺列表信息
     };
+  },
+  async beforeMount() {
+    if (!this.$route.params.geohash) {
+      const address = await getDefaultCity;
+      this.geohash = address.latitude + "," + address.longitude;
+    } else {
+      this.geohash = this.$route.params.geohash;
+    }
+    //保存geohash 到vuex
+    this.SAVE_GEOHASH(this.geohash);
+    //获取位置信息
+    let res = await getAddressBygeohash(this.geohash);
+
+    this.msiteTitle = res.name;
+    // 记录当前经度纬度
+    this.RECORD_ADDRESS(res);
+    this.hasGetData = true;
   },
   created() {
     this.addressName = Api.isRouteData("address", this.$route.params.address);
-  },
-
-  watch: {
-    selected(val, oldval) {
-      console.log(val);
-    }
   },
 
   methods: {
     //切换搜索页
     toSearch() {
       this.selected = "发现";
-    }
+    },
+    //切换个人信息页
+    toUser() {
+      this.selected = "我的";
+    },
+    ...mapMutations(["RECORD_ADDRESS", "SAVE_GEOHASH"])
   },
 
   components: {
@@ -106,6 +126,7 @@ export default {
   computed: {}
 };
 </script>
+
 <style lang="less">
 @import "../../style/basic.less";
 .foodinfo {

@@ -1,16 +1,14 @@
 <template>
-       <mt-swipe :auto="0" class="navbar">
-              <mt-swipe-item v-for="(item,index) in menulist" :key="index">
-                <ul class="foodmenu">
-                  <li v-for="(v,i) in item" :key="i">
-                     <img :src="v.image_url|url" 
-                    >
-                   
-                    <span>{{v.title}}</span>
-                  </li>
-                </ul>
-              </mt-swipe-item>
-            </mt-swipe>
+  <mt-swipe :auto="0" class="navbar">
+    <mt-swipe-item v-for="(item,index) in menulist" :key="index">
+      <ul class="foodmenu">
+        <router-link :to="{name:'shopsorting',params:{title:v.title}}" tag="li" v-for="(v,i) in item" :key="i">
+          <img :src="v.image_url|url">
+          <span>{{v.title}}</span>
+        </router-link>
+      </ul>
+    </mt-swipe-item>
+  </mt-swipe>
 </template>
 <script>
 import { getFoodEntry } from "@/ports";
@@ -18,7 +16,7 @@ export default {
   data() {
     return {
       menulist: [], //菜单
-      geohash: ""
+      geohash: null
     };
   },
   created() {
@@ -36,8 +34,6 @@ export default {
         newMenulist.push(res.slice(i, i + 8));
       }
       this.menulist = newMenulist;
-
-      console.log(this.menulist);
     }
   }
 };

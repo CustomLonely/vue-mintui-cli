@@ -42,7 +42,7 @@ export default {
   created() {
     this.cityId = Api.isRouteData("cityid", this.$route.params.cityid);
     this.cityName = Api.isRouteData("cityname", this.$route.params.name);
-    console.log(this.$route.params);
+
     this.initData();
   },
 
@@ -91,7 +91,9 @@ export default {
         this.isCity = true;
         this.historyList.push(selecthistory);
       }
+
       Api.setStore("placehistory", this.historyList);
+
       this.$router.push({
         name: "food",
         params: {
