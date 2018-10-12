@@ -8,4 +8,6 @@ export { default as Card } from './card/Card.vue'
 
 export { default as Weather } from './weather/Weather.vue'
 
+export { default as Sortmenu } from './sortmenu/Sortmenu.vue'
+
 

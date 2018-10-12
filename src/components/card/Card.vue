@@ -1,6 +1,6 @@
 <template>
   <ul class="shoplist">
-    <router-link to="" tag="li" class="carditem" v-for="(item,index) in shopList" :key="index">
+    <router-link :to="'/shopinfo'" tag="li" class="carditem" v-for="(item,index) in shopList" :key="index">
       <div class="cardleft">
         <div class="imgbox">
           <img @click="$preview.open(index, shopList)" 

@@ -54,7 +54,8 @@ import {
   Loadmore,
   Lazyload,
   TabContainer,
-  TabContainerItem
+  TabContainerItem,
+  Popup
 
 } from 'mint-ui';
 
@@ -75,7 +76,7 @@ Vue.component(SwipeItem.name, SwipeItem);
 Vue.use(Lazyload);
 Vue.component(TabContainer.name, TabContainer);
 Vue.component(TabContainerItem.name, TabContainerItem);
-
+Vue.component(Popup.name, Popup);
 //导入网络请求模块
 import { post, get, patch, put } from '@/untils/http'
 

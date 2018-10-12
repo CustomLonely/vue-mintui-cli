@@ -15,6 +15,13 @@ export const longitude = (state) => {
     return state.longitude
 }
 
+/**
+ * sortname 食品分类名称
+ * @param {*} state 
+ */
+export const sortname = (state) => {
+    return state.sortname
+}
 
 /**
  * cartList 加入购物车的商品列表
