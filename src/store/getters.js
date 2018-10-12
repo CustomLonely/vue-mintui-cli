@@ -2,6 +2,8 @@
  * latitude 当前位置纬度
  * @param {*} state 
  */
+
+import { getStore } from '@/untils/untils'
 export const latitude = (state) => {
     return state.latitude;
 }
@@ -20,7 +22,7 @@ export const longitude = (state) => {
  * @param {*} state 
  */
 export const sortname = (state) => {
-    return state.sortname
+    return state.sortname;
 }
 
 /**

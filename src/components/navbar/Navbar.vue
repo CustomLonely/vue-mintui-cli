@@ -2,16 +2,18 @@
   <mt-swipe :auto="0" class="navbar">
     <mt-swipe-item v-for="(item,index) in menulist" :key="index">
       <ul class="foodmenu">
-        <router-link :to="{name:'shopsorting',params:{title:v.title}}" tag="li" v-for="(v,i) in item" :key="i">
-          <img :src="v.image_url|url">
+          <li  @click="recordtitle(v.title)" tag="li" v-for="(v,i) in item" :key="i">
+           <img :src="v.image_url|url">
           <span>{{v.title}}</span>
-        </router-link>
+        </li>
       </ul>
     </mt-swipe-item>
   </mt-swipe>
 </template>
 <script>
 import { getFoodEntry } from "@/ports";
+
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -34,7 +36,12 @@ export default {
         newMenulist.push(res.slice(i, i + 8));
       }
       this.menulist = newMenulist;
-    }
+    },
+    recordtitle(title) {
+      this.$router.push({ name: "shopsorting", params: { title } });
+      this.RECORD_SORTNAME(title);
+    },
+    ...mapMutations(["RECORD_SORTNAME"])
   }
 };
 </script>

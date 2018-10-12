@@ -1,6 +1,6 @@
 <template>
     <div>
-         <Header :mytitle="title" goback="true"></Header>
+         <Header :mytitle="sortname" goback="true"></Header>
          <Sortmenu></Sortmenu>
          <Card class="sortshoplist"></Card>
     </div>
@@ -14,9 +14,7 @@ export default {
       title: null
     };
   },
-  created() {
-    this.title = this.$route.params.title;
-  },
+  created() {},
   computed: {
     ...mapGetters(["sortname"])
   },

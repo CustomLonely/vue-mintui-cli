@@ -1,6 +1,6 @@
 
 import * as type from './mutation-types';
-
+import { setStore } from '@/untils/untils'
 export default {
     //纪录当前经度纬度
     [type.RECORD_ADDRESS](state, {
@@ -50,5 +50,9 @@ export default {
     //保存geohash
     [type.SAVE_GEOHASH](state, geohash) {
         state.geohash = geohash;
+    },
+    //纪录食品分类名称
+    [type.RECORD_SORTNAME](state, sortname) {
+        state.sortname = sortname
     }
 }
