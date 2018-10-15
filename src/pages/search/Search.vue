@@ -50,8 +50,8 @@ export default {
 
   methods: {
     initData() {
-      if (Api.getStore("shoplist")) {
-        this.cityList = JSON.parse(Api.getStore("shoplist"));
+      if (this.Api.getStore("shoplist")) {
+        this.cityList = JSON.parse(this.Api.getStore("shoplist"));
         this.isHistory = this.cityList.length > 0 ? true : false;
       } else {
         this.cityList = [];
@@ -75,7 +75,7 @@ export default {
      * 如果没有则新增，如果有则不做重复储存，判断完成后进入下一页
      */
     nextPage(index, geohash, address) {
-      let history = Api.getStore("shoplist");
+      let history = this.Api.getStore("shoplist");
       let selecthistory = this.cityList[index];
       if (history) {
         let checkrepeat = false;
@@ -92,7 +92,7 @@ export default {
         this.isCity = true;
         this.historyList.push(selecthistory);
       }
-      Api.setStore("shoplist", this.historyList);
+      this.Api.setStore("shoplist", this.historyList);
       this.$router.push({
         name: "shopinfo",
         params: {
@@ -103,7 +103,7 @@ export default {
     },
     //清除历史纪录
     clearAll() {
-      Api.removeStore("shoplist");
+      this.Api.removeStore("shoplist");
       this.initData();
     }
   },

@@ -22,6 +22,7 @@ export const longitude = (state) => {
  * @param {*} state 
  */
 export const sortname = (state) => {
+    getStore('sortname')
     return state.sortname;
 }
 

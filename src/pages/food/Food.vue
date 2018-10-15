@@ -101,7 +101,10 @@ export default {
     this.hasGetData = true;
   },
   created() {
-    this.addressName = Api.isRouteData("address", this.$route.params.address);
+    this.addressName = this.Api.isRouteData(
+      "address",
+      this.$route.params.address
+    );
   },
 
   methods: {

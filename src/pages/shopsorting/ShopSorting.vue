@@ -1,6 +1,6 @@
 <template>
     <div>
-         <Header :mytitle="sortname" goback="true"></Header>
+         <Header :mytitle="title" goback="true"></Header>
          <Sortmenu></Sortmenu>
          <Card class="sortshoplist"></Card>
     </div>
@@ -14,10 +14,10 @@ export default {
       title: null
     };
   },
-  created() {},
-  computed: {
-    ...mapGetters(["sortname"])
+  created() {
+    this.title = this.$route.query.title;
   },
+
   components: {
     Header,
     Card,

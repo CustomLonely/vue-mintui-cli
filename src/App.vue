@@ -18,7 +18,7 @@
 export default {
   data() {
     return {
-      content: "密码登录"
+      Api: this.Api
     };
   },
   watch: {}

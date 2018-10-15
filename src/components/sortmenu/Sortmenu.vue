@@ -31,6 +31,7 @@ export default {
     toggle(e) {
       //   this.currentIndex = this.$refs.menuitem.key;
       //   console.log(e.currentTarget);
+
       this.down = !this.down;
       this.popupVisible2 = !this.popupVisible2;
     }

@@ -3,7 +3,7 @@
     <router-link :to="'/shopinfo'" tag="li" class="carditem" v-for="(item,index) in shopList" :key="index">
       <div class="cardleft">
         <div class="imgbox">
-          <img @click="$preview.open(index, shopList)" 
+          <img @click="$preview.open(index, shopList);$event.stopPropagation();" 
           :src="item.image_path | url(imgBaseUrl)"  
           class="cardimg preview-img">
         </div>
@@ -52,7 +52,7 @@ export default {
     return {
       shopList: [],
       params: {},
-      imgBaseUrl: Api.Config.imgBaseUrl
+      imgBaseUrl: this.Api.Config.imgBaseUrl
     };
   },
   //restaurant_category_id餐馆分类id
@@ -68,7 +68,7 @@ export default {
     "restaurant_category_ids"
   ],
   beforeMount() {
-    let arr = Api.getData("geohash").split(",");
+    let arr = this.Api.getData("geohash").split(",");
     this.params.latitude = arr[0];
     this.params.longitude = arr[1];
     this.params.limit = 0;

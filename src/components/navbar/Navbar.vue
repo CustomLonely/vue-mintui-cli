@@ -13,7 +13,6 @@
 <script>
 import { getFoodEntry } from "@/ports";
 
-import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -22,7 +21,7 @@ export default {
     };
   },
   created() {
-    this.geohash = Api.isRouteData("geohash", this.$route.params.geohash);
+    this.geohash = this.Api.isRouteData("geohash", this.$route.params.geohash);
   },
   mounted() {
     this.getMenulist();
@@ -38,10 +37,8 @@ export default {
       this.menulist = newMenulist;
     },
     recordtitle(title) {
-      this.$router.push({ name: "shopsorting", params: { title } });
-      this.RECORD_SORTNAME(title);
-    },
-    ...mapMutations(["RECORD_SORTNAME"])
+      this.$router.push({ name: "shopsorting", query: { title } });
+    }
   }
 };
 </script>

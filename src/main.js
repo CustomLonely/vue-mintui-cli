@@ -98,7 +98,7 @@ import {
 // Vue.prototype.$patch = patch;
 // Vue.prototype.$put = put;
 
-window.Api = {
+const Api = {
   Config,
   post,
   get,
@@ -114,7 +114,7 @@ window.Api = {
   removeData
 }
 
-
+Vue.prototype.Api = Api
 //使用实例:
 // this.$get('/api/v2/movie/top250')
 // .then(res => {
