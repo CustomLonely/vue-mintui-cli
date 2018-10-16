@@ -28,6 +28,7 @@ export default {
  <style lang="less">
 @import "./style/base.less";
 @import "./assets/images/iconfont/icon.css";
+@import "./components/animate/animate.css";
 #app {
   position: absolute;
   left: 0;

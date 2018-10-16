@@ -24,7 +24,7 @@
 <script>
 import { Header } from "@/components";
 import { searchCity } from "@/ports";
-
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -40,8 +40,8 @@ export default {
   },
 
   created() {
-    this.cityId = Api.isRouteData("cityid", this.$route.params.cityid);
-    this.cityName = Api.isRouteData("cityname", this.$route.params.name);
+    this.cityId = this.Api.isRouteData("cityid", this.$route.params.cityid);
+    this.cityName = this.Api.isRouteData("cityname", this.$route.params.name);
 
     this.initData();
   },
@@ -49,9 +49,10 @@ export default {
   mounted() {},
 
   methods: {
+    ...mapMutations(["RECORD_ADDRESS"]),
     initData() {
-      if (Api.getStore("placehistory")) {
-        this.cityList = JSON.parse(Api.getStore("placehistory"));
+      if (this.Api.getStore("placehistory")) {
+        this.cityList = JSON.parse(this.Api.getStore("placehistory"));
         this.isHistory = this.cityList.length > 0 ? true : false;
       } else {
         this.cityList = [];
@@ -74,7 +75,7 @@ export default {
      * 如果没有则新增，如果有则不做重复储存，判断完成后进入下一页
      */
     nextPage(index, geohash, address) {
-      let history = Api.getStore("placehistory");
+      let history = this.Api.getStore("placehistory");
       let selecthistory = this.cityList[index];
       if (history) {
         let checkrepeat = false;
@@ -92,11 +93,11 @@ export default {
         this.historyList.push(selecthistory);
       }
 
-      Api.setStore("placehistory", this.historyList);
-
+      this.Api.setStore("placehistory", this.historyList);
+      this.RECORD_ADDRESS(geohash);
       this.$router.push({
         name: "food",
-        params: {
+        query: {
           geohash,
           address
         }
@@ -104,7 +105,7 @@ export default {
     },
     //清除历史纪录
     clearAll() {
-      Api.removeStore("placehistory");
+      this.Api.removeStore("placehistory");
       this.initData();
     }
   },

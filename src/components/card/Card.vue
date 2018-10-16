@@ -1,5 +1,6 @@
 <template>
-  <ul class="shoplist">
+  <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+    <ul class="shoplist">
     <router-link :to="'/shopinfo'" tag="li" class="carditem" v-for="(item,index) in shopList" :key="index">
       <div class="cardleft">
         <div class="imgbox">
@@ -29,7 +30,8 @@
         <p class="fee">
           <span class="leftinfo">
                ¥{{item.float_minimum_order_amount}}起送
-            <span class="segmentation">/</span> {{item.piecewise_agent_fee.tips}}
+            <span class="segmentation">/</span>
+            {{item.piecewise_agent_fee.tips}}
           </span>
           <span class="rightinfo">
               		<span class="distance" v-if="Number(item.distance)">{{item.distance > 1000? (item.distance/1000).toFixed(2) + 'km': item.distance + 'm'}}
@@ -43,16 +45,22 @@
       </div>
     </router-link>
   </ul>
+  </mt-loadmore>
 </template>
+
 <script>
 import { Star } from "@/components";
-import { restaurants } from "@/ports";
+import { restaurants, getAddressBygeohash } from "@/ports";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
       shopList: [],
-      params: {},
-      imgBaseUrl: this.Api.Config.imgBaseUrl
+      offset: 0, //跳过多少条数据，默认0
+      imgBaseUrl: this.Api.Config.imgBaseUrl,
+      allLoaded: false,
+      limit: 20,
+      geohash: null
     };
   },
   //restaurant_category_id餐馆分类id
@@ -65,25 +73,42 @@ export default {
     "order_by",
     "delivery_mode",
     "support_ids",
-    "restaurant_category_ids"
+    "restaurant_category_ids",
+    "confirmSelect"
   ],
-  beforeMount() {
-    let arr = this.Api.getData("geohash").split(",");
-    this.params.latitude = arr[0];
-    this.params.longitude = arr[1];
-    this.params.limit = 0;
+  watch: {},
+  computed: {
+    ...mapGetters(["latitude", "longitude"])
   },
-  mounted() {
-    this.getNearbyShop(this.params);
+  created() {
+    this.geohash = this.$route.query.geohash;
+    this.initData();
   },
+  mounted() {},
   methods: {
+    ...mapMutations(["RECORD_ADDRESS"]),
     //商家列表
-    async getNearbyShop(params) {
-      let res = await restaurants(params);
-      if (res.length <= 0) {
+    async initData() {
+      if (!this.latitude || !this.longitude) {
+        let res = await getAddressBygeohash(this.geohash);
+
+        //// 记录当前经度纬度进入vuex
+        this.RECORD_ADDRESS(res);
+      }
+
+      let res = await restaurants(
+        this.latitude,
+        this.longitude,
+        this.offset,
+        this.restaurant_category_id
+      );
+
+      if (res.length < 20) {
+        this.allLoaded = true;
         return;
       }
       this.shopList = res;
+
       this.shopList.forEach((item, index) => {
         item.w = 600;
         item.h = 400;
@@ -102,6 +127,14 @@ export default {
         zhunStatus = false;
       }
       return zhunStatus;
+    },
+    //下拉加载
+    loadTop() {
+      this.initData();
+    },
+    //上啦刷新
+    loadBottom() {
+      console.log("到底了");
     }
   },
   components: {

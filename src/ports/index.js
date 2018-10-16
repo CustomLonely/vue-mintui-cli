@@ -80,23 +80,28 @@ export const getFoodEntry = (geohash) => get('v2/index_entry', {
  */
 
 export const restaurants =
-    (obj) => {
-
-        let params = {
-            latitude: obj.latitude,
-            longitude: obj.longitude,
-            offset: obj.offset || 0,
-            limit: obj.limit || 20,
-            restaurant_category_id: obj.restaurant_category_id,
-            order_by: obj.order_by || 4,
-            delivery_mode: obj.delivery_mode,
-            support_ids: obj.support_ids,
-            restaurant_category_ids: obj.restaurant_category_ids
+    (latitude, longitude, offset, restaurant_category_id = '', restaurant_category_ids = '',
+        order_by = '', delivery_mode = '', support_ids = []) => {
+        let supportStr = '';
+        support_ids.forEach(item => {
+            if (item.status) {
+                supportStr += '&support_ids[]=' + item.id;
+            }
+        });
+        let data = {
+            latitude,
+            longitude,
+            offset,
+            limit: '20',
+            'extras[]': 'activities',
+            keyword: '',
+            restaurant_category_id: restaurant_category_id || '',
+            'restaurant_category_ids[]': restaurant_category_ids,
+            order_by,
+            'delivery_mode[]': delivery_mode + supportStr
         };
-        return get('shopping/restaurants', params)
-
-    }
-
+        return get('shopping/restaurants', data);
+    };
 
 /**
  * 搜索餐馆
@@ -337,8 +342,9 @@ export const checkExsis = (checkNumber, type) => get('/v1/users/exists', {
  * 
  */
 
-export let postCaptchas = post('v1/captchas');
 
+
+export const postCaptchas = () => post('v1/captchas')
 /***
  * 获取用户信息
  * 
@@ -367,7 +373,7 @@ export const login = (username, password, captcha_code) =>
  * 
  */
 
-export const signOut = get('v2/signout');
+export const signOut = () => get('v2/signout');
 
 /***
  * 修改密码

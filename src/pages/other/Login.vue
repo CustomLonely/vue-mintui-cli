@@ -34,23 +34,17 @@ export default {
 
   methods: {
     getSecurityCode() {
-      Api.post("v1/captchas").then(res => {
+      postCaptchas().then(res => {
         this.imgUrl = res.code;
       });
     },
-
-    // async getSecurityCode() {
-    //   let res = await postCaptchas;
-    //   this.imgUrl = res.code;
-    // },
 
     login() {
       console.log(this.username, this.password, this.securityCode);
       login(this.username, this.password, this.securityCode).then(
         res => {
-          console.log(res);
           if (res.status == 0) {
-            this.getSecurityCode();
+            // this.getSecurityCode();
           }
         },
         err => {

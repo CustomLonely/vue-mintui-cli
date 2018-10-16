@@ -73,7 +73,7 @@ export const removeData = name => {
 }
 
 /***
- * 路由传参是否存在sessionStorage
+ * 路由传参是否存在sessionStorage/localStorage
  * @param store 数据名称
  * @param name  sessionid
  */

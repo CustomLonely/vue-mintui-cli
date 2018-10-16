@@ -3,7 +3,9 @@ import axios from 'axios';
 
 import Config from '../config/Config'
 axios.defaults.timeout = 5000;
+
 axios.defaults.baseURL = Config.url;
+// axios.defaults.withCredentials = true;
 
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -15,10 +17,10 @@ axios.interceptors.request.use(
 
     config.data = JSON.stringify(config.data);
     config.headers = {
-
       Accept: 'application/json',
       'Content-Type': 'application/x-www-form-urlencoded',
     }
+
 
     // if(token){
     //   config.params = {'token':token}

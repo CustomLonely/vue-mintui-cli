@@ -93,11 +93,6 @@ import {
 } from '@/untils/untils'
 //定义全局变量
 
-// Vue.prototype.$post = post;
-// Vue.prototype.$get = get;
-// Vue.prototype.$patch = patch;
-// Vue.prototype.$put = put;
-
 const Api = {
   Config,
   post,
@@ -115,15 +110,7 @@ const Api = {
 }
 
 Vue.prototype.Api = Api
-//使用实例:
-// this.$get('/api/v2/movie/top250')
-// .then(res => {
-//   console.log(res)
-// },
-//     err=>{
-//    console.log(err)
-//     }
-// )
+
 Vue.config.productionTip = true
 
 /* eslint-disable no-new */

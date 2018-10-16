@@ -2,7 +2,7 @@
   <mt-swipe :auto="0" class="navbar">
     <mt-swipe-item v-for="(item,index) in menulist" :key="index">
       <ul class="foodmenu">
-          <li  @click="recordtitle(v.title)" tag="li" v-for="(v,i) in item" :key="i">
+          <li  @click="recordtitle(v.title,geohash,v.link)" tag="li" v-for="(v,i) in item" :key="i">
            <img :src="v.image_url|url">
           <span>{{v.title}}</span>
         </li>
@@ -36,8 +36,29 @@ export default {
       }
       this.menulist = newMenulist;
     },
-    recordtitle(title) {
-      this.$router.push({ name: "shopsorting", query: { title } });
+    //对url解析
+    recordtitle(title, geohash, link) {
+      let query = link.split("?")[1];
+      query = decodeURIComponent(query).split("&");
+      let newList = [];
+      query.forEach(function(part) {
+        let result = {};
+        let item = part.split("=");
+        result[item[0]] = item[1];
+        newList.push(result);
+      });
+
+      newList[0].filter_key = JSON.parse(newList[0].filter_key);
+
+      this.$router.push({
+        name: "shopsorting",
+        query: {
+          title,
+          geohash,
+          restaurant_category_id:
+            newList[0].filter_key.restaurant_category_id.id
+        }
+      });
     }
   }
 };
