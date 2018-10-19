@@ -4,7 +4,7 @@
     <router-link :to="'/shopinfo'" tag="li" class="carditem" v-for="(item,index) in shopList" :key="index">
       <div class="cardleft">
         <div class="imgbox">
-          <img @click="$preview.open(index, shopList);$event.stopPropagation();" 
+          <img @click="$preview.open(index, shopList);$event.stopPropagation();$event.preventDefault();" 
           :src="item.image_path | url(imgBaseUrl)"  
           class="cardimg preview-img">
         </div>

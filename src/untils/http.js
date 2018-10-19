@@ -2,19 +2,21 @@
 import axios from 'axios';
 
 import Config from '../config/Config'
-axios.defaults.timeout = 5000;
 
+axios.defaults.timeout = 5000; // 请求超时时间
 axios.defaults.baseURL = Config.url;
-// axios.defaults.withCredentials = true;
+
 
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-
+// import { getToken } from '@/utils/auth'
 //http request 拦截器
 axios.interceptors.request.use(
   config => {
     // const token = getCookie('名称');注意使用的时候需要引入cookie方法，推荐js-cookie
-
+    // if (store.getters.token) {
+    //   config.headers['X-Token'] = getToken() // 让每个请求携带token--['X-Token']为自定义key 请根据实际情况自行修改
+    // }
     config.data = JSON.stringify(config.data);
     config.headers = {
       Accept: 'application/json',
