@@ -345,6 +345,7 @@ export const checkExsis = (checkNumber, type) => get('/v1/users/exists', {
 
 
 export const postCaptchas = () => post('v1/captchas')
+
 /***
  * 获取用户信息
  * 
@@ -361,13 +362,14 @@ export const getUserInfo = get('v1/user', {
  * @param {string}   captcha_code                验证码
  */
 
-export const login = (username, password, captcha_code) =>
-    post('v2/login', {
+
+export function login(username, password, captcha_code) {
+    return post('v2/login', {
         username,
         password,
         captcha_code
     })
-
+}
 /***
  * 退出
  * 

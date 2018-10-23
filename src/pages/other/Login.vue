@@ -10,13 +10,14 @@
          <img v-show="imgUrl"  :src="imgUrl" >
       </div>
          </mt-field>
-     <mt-button class="login_button" @click="login" type="primary">登录</mt-button>
+     <mt-button class="login_button" @click="acountLogin" type="primary">登录</mt-button>
   </div>
 </template>
 
 <script>
 import { Header } from "@/components/index.js";
 import { postCaptchas, login } from "@/ports";
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -33,19 +34,24 @@ export default {
   },
 
   methods: {
+    ...mapMutations(["RECORD_USERINFO"]),
     getSecurityCode() {
       postCaptchas().then(res => {
         this.imgUrl = res.code;
       });
     },
 
-    login() {
-      console.log(this.username, this.password, this.securityCode);
+    acountLogin() {
       login(this.username, this.password, this.securityCode).then(
         res => {
+          console.log(res);
           if (res.status == 0) {
-            // this.getSecurityCode();
+            this.getSecurityCode();
+          } else {
+            this.RECORD_USERINFO(res);
           }
+
+          this.$router.go(-1);
         },
         err => {
           console.log(err);

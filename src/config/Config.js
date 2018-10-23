@@ -27,7 +27,7 @@ let routerMode = 'hash';
 
 if (process.env.NODE_ENV == 'development') {
   apiUrl['imgBaseUrl'] = '//elm.cangdu.org/img/';
-  apiUrl['baseUrl'] = '//elm.cangdu.org:8001';
+  apiUrl['baseUrl'] = '//127.0.0.1:8001';
 
 } else if (process.env.NODE_ENV == 'production') {
   apiUrl['baseUrl'] = '//elm.cangdu.org:8001';

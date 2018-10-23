@@ -21,7 +21,7 @@ export default {
     [type.RECORD_USERINFO](state, info) {
         state.userinfo = info;
         state.login = true;
-        Api.setStore('user_id', info.user_id);
+        setStore('user_id', info.user_id);
     },
 
     //获取用户信息存入vuex

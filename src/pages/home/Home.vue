@@ -116,6 +116,21 @@ export default {
     getTotalCity.then(res => {
       this.totalCity = res;
     });
+
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        // 定位成功会调用该方法
+        // position.coords.latitude 纬度
+        // position.coords.longitude 经度
+        // position.coords.accuracy 精度
+        // position.coords.altitude 海拔高度
+        console.log(position.coords, 1);
+      },
+      function(error) {
+        // 定位失败会调用该方法
+        // error 是错误信息
+      }
+    );
   },
 
   computed: {
