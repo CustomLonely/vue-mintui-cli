@@ -3,7 +3,7 @@
  * @param {*} state 
  */
 
-import { getStore } from '@/untils/untils'
+import { getStore, setStore } from '@/untils/untils'
 export const latitude = (state) => {
     return state.latitude;
 }

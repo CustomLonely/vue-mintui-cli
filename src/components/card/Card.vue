@@ -31,7 +31,7 @@
           <span class="leftinfo">
                ¥{{item.float_minimum_order_amount}}起送
             <span class="segmentation">/</span>
-            {{item.piecewise_agent_fee.tips}}
+            {{item.piecewise_agent_fee.tips||''}}
           </span>
           <span class="rightinfo">
               		<span class="distance" v-if="Number(item.distance)">{{item.distance > 1000? (item.distance/1000).toFixed(2) + 'km': item.distance + 'm'}}

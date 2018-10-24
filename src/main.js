@@ -55,7 +55,8 @@ import {
   Lazyload,
   TabContainer,
   TabContainerItem,
-  Popup
+  Popup,
+  MessageBox
 
 } from 'mint-ui';
 
@@ -77,6 +78,7 @@ Vue.use(Lazyload);
 Vue.component(TabContainer.name, TabContainer);
 Vue.component(TabContainerItem.name, TabContainerItem);
 Vue.component(Popup.name, Popup);
+
 //导入网络请求模块
 import { post, get, patch, put } from '@/untils/http'
 

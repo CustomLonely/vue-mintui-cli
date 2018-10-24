@@ -18,6 +18,7 @@
 import { Header } from "@/components/index.js";
 import { postCaptchas, login } from "@/ports";
 import { mapMutations } from "vuex";
+
 export default {
   data() {
     return {
@@ -47,11 +48,11 @@ export default {
           console.log(res);
           if (res.status == 0) {
             this.getSecurityCode();
+            MessageBox("提示", res.message);
           } else {
             this.RECORD_USERINFO(res);
+            this.$router.go(-1);
           }
-
-          this.$router.go(-1);
         },
         err => {
           console.log(err);

@@ -1,6 +1,6 @@
 <template>
   <div class="homeinfo">
-    <Header logo="true" :islogin="$store.getters.login"></Header>
+    <Header logo="true" :islogin="login"></Header>
     <mt-cell :title="addressInfo" class="addressinfo">
       <span class="weatherwrapper">{{weather}}℃ <Weather :qihou='tianqi'></Weather></span>
       <span slot="icon"> <i class="icon icon-ziyuandoctor_icon5"></i></span>
@@ -28,6 +28,7 @@
 </template>
 <script>
 import { Header, Weather } from "@/components";
+
 import moment from "moment";
 import {
   getDefaultCity,
@@ -144,7 +145,8 @@ export default {
         }
       }
       return sortObj;
-    }
+    },
+    ...mapGetters(["login"])
   },
 
   components: {
